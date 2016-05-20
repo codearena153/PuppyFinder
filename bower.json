@@ -1,0 +1,20 @@
+{
+  "name": "client",
+  "version": "0.0.0",
+  "homepage": "https://github.com/codearena153/puppyfinder",
+  "authors": [
+    "lennyKim <heliotherapyy@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    'lib'
+  ],
+  "dependencies": {
+    "angular": "1.5.5"
+  }
+}
