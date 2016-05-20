@@ -3,10 +3,12 @@ var express = require('express');
 var app = express();
 app.set('port', process.env.PORT || 8888);
 
-app.get('/temp', function(req, res) {
+// so that broswer can locate index.html inside client folder
+app.use(express.static(__dirname + '/client'));
+
+app.get('/', function(req, res) {
     res.type('text/plain');
     res.send("intro loaded!");
-    // res.redirect('/#');
 });
 
 app.get('/intro', function(req, res) {
