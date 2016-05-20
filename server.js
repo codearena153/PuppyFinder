@@ -3,10 +3,10 @@ var express = require('express');
 var app = express();
 app.set('port', process.env.PORT || 8888);
 
-app.get('/', function(req, res) {
+app.get('/temp', function(req, res) {
     res.type('text/plain');
-    // res.send("intro loaded!");
-    res.redirect('/intro');
+    res.send("intro loaded!");
+    // res.redirect('/#');
 });
 
 app.get('/intro', function(req, res) {
@@ -24,11 +24,11 @@ app.get('/result', function(req, res) {
     res.send('result loaded!');
 });
 
-app.use(function(req, res) {
-    res.type('text/plain');
-    res.status(404);
-    res.send('404 - Not Found');
-});
+// app.use(function(req, res) {
+//     res.type('text/plain');
+//     res.status(404);
+//     res.send('404 - Not Found');
+// });
 
 app.listen(app.get('port'), function() {
     console.log("Express started on http://localhost:" +
