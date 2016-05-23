@@ -19,7 +19,7 @@ angular.module('puppyfinder', [
             controller: 'SurveyController',
         })
         .when('/result', {
-            templateUrl: 'app/survey/result.html',
+            templateUrl: 'app/result/result.html',
             controller: 'ResultController'
         })
         .otherwise('/intro');
