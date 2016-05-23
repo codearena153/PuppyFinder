@@ -1,7 +1,7 @@
 angular.module('puppyfinder', [
     'puppyfinder.intro',
-    // 'puppyfinder.survey',
-    // 'puppyfinder.result',
+    'puppyfinder.survey',
+    'puppyfinder.result',
     'ngRoute'
 ])
 .config(function ($routeProvider, $httpProvider) {
@@ -13,6 +13,14 @@ angular.module('puppyfinder', [
         .when('/intro', {
             templateUrl: 'app/intro/intro.html',
             controller: 'IntroController'
+        })
+        .when('/survey', {
+            templateUrl: 'app/survey/survey.html',
+            controller: 'SurveyController',
+        })
+        .when('/result', {
+            templateUrl: 'app/survey/result.html',
+            controller: 'ResultController'
         })
         .otherwise('/intro');
 });
