@@ -1,7 +1,7 @@
 angular.module('puppyfinder', [
     'puppyfinder.intro',
-    // 'puppyfinder.survey',
-    // 'puppyfinder.result',
+    'puppyfinder.survey',
+    'puppyfinder.result',
     'ngRoute'
 ])
 .config(function ($routeProvider, $httpProvider) {
@@ -14,7 +14,6 @@ angular.module('puppyfinder', [
             templateUrl: 'app/intro/intro.html',
             controller: 'IntroController'
         })
-<<<<<<< c159d209e2e75582d11e1f79f91d9734b952e4f0
         .when('/survey', {
             templateUrl: 'app/survey/survey.html',
             controller: 'SurveyController',
@@ -23,16 +22,5 @@ angular.module('puppyfinder', [
             templateUrl: 'app/result/result.html',
             controller: 'ResultController'
         })
-||||||| merged common ancestors
-=======
-        .when('/survey', {
-            templateUrl: 'app/survey/survey.html',
-            controller: 'SurveyController',
-        })
-        .when('/result', {
-            templateUrl: 'app/result/result.html',
-            controller: 'ResultController'
-        })
->>>>>>> (feat) add contents to intro.html
         .otherwise('/intro');
 });
