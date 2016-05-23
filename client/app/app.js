@@ -1,7 +1,7 @@
 angular.module('puppyfinder', [
     'puppyfinder.intro',
-    'puppyfinder.survey',
-    'puppyfinder.result',
+    // 'puppyfinder.survey',
+    // 'puppyfinder.result',
     'ngRoute'
 ])
 .config(function ($routeProvider, $httpProvider) {
