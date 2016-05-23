@@ -14,7 +14,6 @@ angular.module('puppyfinder', [
             templateUrl: 'app/intro/intro.html',
             controller: 'IntroController'
         })
-
         .when('/survey', {
             templateUrl: 'app/survey/survey.html',
             controller: 'SurveyController',
