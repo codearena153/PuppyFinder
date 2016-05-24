@@ -18,7 +18,7 @@ app.get('/intro', function(req, res) {
 
 app.get('/survey', function(req, res) {
     res.type('text/plain');
-    res.send('questions loaded!');
+    res.send('survey loaded!');
 });
 
 app.get('/result', function(req, res) {
