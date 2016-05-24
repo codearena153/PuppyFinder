@@ -26,6 +26,10 @@ app.get('/result', function(req, res) {
     res.send('result loaded!');
 });
 
+app.get('/admin', function(req, res) {
+    res.sendFile(__dirname + '/admin/admin.html');
+})
+
 // app.use(function(req, res) {
 //     res.type('text/plain');
 //     res.status(404);
