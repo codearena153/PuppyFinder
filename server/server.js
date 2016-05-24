@@ -4,7 +4,8 @@ var app = express();
 app.set('port', process.env.PORT || 8888);
 
 // so that broswer can locate index.html inside client folder
-app.use(express.static(__dirname + '/client'));
+app.use(express.static(__dirname + '/../client'));
+app.use(express.static(__dirname + '/admin'));
 
 app.get('/', function(req, res) {
     res.type('text/plain');
@@ -28,7 +29,20 @@ app.get('/result', function(req, res) {
 
 app.get('/admin', function(req, res) {
     res.sendFile(__dirname + '/admin/admin.html');
-})
+});
+
+app.get('/upload', function(req, res) {
+    res.sendFile(__dirname + '/admin/upload.html');
+});
+
+app.get('/update', function(req, res) {
+    res.sendFile(__dirname + '/admin/update.html');
+});
+
+app.get('/stat', function(req, res) {
+    res.sendFile(__dirname + '/admin/stat.html');
+});
+
 
 // app.use(function(req, res) {
 //     res.type('text/plain');

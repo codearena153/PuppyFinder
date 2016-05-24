@@ -2,7 +2,6 @@ angular.module('puppyfinder', [
     'puppyfinder.intro',
     'puppyfinder.survey',
     'puppyfinder.result',
-    'puppyfinder.admin',
     'ngRoute'
 ])
 .config(function ($routeProvider, $httpProvider) {

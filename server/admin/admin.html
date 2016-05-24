@@ -2,99 +2,15 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Puppy 추가</title>
+  <title>관리자 페이지</title>
 </head>
 <body>
-  <h1>Puppy 추가</h1>
 
-  <form method="post" action="/add">
-    견종:
-    <input type="text" name="breed" maxlength="20" required><br><br>
-    크기:
-    <select name="size">
-      <option value="big" selected>대</option>
-      <option value="medium">중</option>
-      <option value="small">소</option>
-    </select>
-    식성:
-    <select name="taste">
-      <option value="picky" selected>까다로움</option>
-      <option value="gluttonous">많이 먹음</option>
-      <option value="frugal">적게 먹음</option>
-    </select>
-    털:
-    <select name="fur">
-      <option value="much" selected>많음</option>
-      <option value="medium">보통</option>
-      <option value="little">적음</option>
-    </select>
-    색깔:
-    <select name="color">
-      <option value="white" selected>하얀색</option>
-      <option value="gray">회색</option>
-      <option value="gold">황금색</option>
-      <option value="black">검정색</option>
-    </select><br><br>
-    경비:
-    <select name="guard">
-      <option value="true">가능</option>
-      <option value="false">불가능</option>
-    </select>
-    운동:
-    <select name="athletic">
-      <option value="high" selected>많이 시켜야 함</option>
-      <option value="medium">보통</option>
-      <option value="low">적게 시켜도 됨</option>
-    </select>
-    친화력:
-    <select name="affinity">
-      <option value="high" selected>강함</option>
-      <option value="medium">보통</option>
-      <option value="low">약함</option>
-    </select><br><br>
-    가격대:
-    <select name="price">
-      <option value="p0-10" selected>10만원 이하</option>
-      <option value="p10-20">10만원~20만원</option>
-      <option value="p20-50">20만원~50만원</option>
-      <option value="p50-100">50만원~100만원</option>
-      <option value="p100-500">100만원~500만원</option>
-      <option value="p500-1000">500만원~1000만원</option>
-      <option value="p1000">1000만원 이상</option>
-    </select>
-    <br><br>
-    월 양육 비용:
-    <select name="cost">
-      <option value="c0-10" selected>10만원 이하</option>
-      <option value="c10-20">10만원~20만원</option>
-      <option value="c20-30">20만원~30만원</option>
-      <option value="c30-50">30만원~50만원</option>
-      <option value="c50-100">50만원~100만원</option>
-      <option value="c100">100만원 이상</option>
-    </select>
-    <br><br>
-    개 사육 장소:
-    <select name="residence">
-      <option value="inside" selected>실내</option>
-      <option value="outside">실외</option>
-    </select>
-    가족 수:
-    <select name="family_size">
-      <option value="f1">1인</option>
-      <option value="f2">2인</option>
-      <option value="f3" selected>3인</option>
-      <option value="f4">4인</option>
-      <option value="f5">5인 이상</option>
-    </select>
-    <br><br>
-    설명: <textarea name="description" rows=10 cols=80 required maxlength="512"></textarea><br><br>
-    이미지:
-    <input type="submit" value="add">
-  </form>
+  <h1>관리자 페이지</h1>
 
-  <script type="text/javascript">
-
-  </script>
+  <a href="/upload">추가</a><br>
+  <a href="/update">갱신/삭제</a><br>
+  <a href="/stat">통계</a>
 
 </body>
 </html>
