@@ -13,6 +13,7 @@ var PuppySchema = new Schema({
   },
 
   // User info
+  // Notice that user data only accepts boolean type
   isUserAllergic: {
     allergic: Boolean,
     weight: Number
@@ -32,11 +33,11 @@ var PuppySchema = new Schema({
 
   // Puppy info
   isPuppyFriendly: {
-    friendly: Number,
+    friendly: String,
     weight: Number
   },
   isPuppyInside: {
-    inside: Boolean,
+    inside: String,
     weight: Number
   },
   initialCost: {
@@ -45,8 +46,7 @@ var PuppySchema = new Schema({
     weight: Number
   },
   maintenance: {
-    min: Number,
-    max: Number,
+    cost: Number,
     weight: Number
   },
 
