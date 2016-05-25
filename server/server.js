@@ -85,9 +85,6 @@ app.post('/result', function(req, res) {
 
     puppy.total_weight = addWeight(puppy);
 
-    console.log('puppy: ---->');
-    console.log(puppy);
-
     puppy.save(function(err, puppy) {
       if (err)  res.send("error saving new puppy");
       else {
