@@ -55,9 +55,13 @@ body {
 /* Supporting surveyCard content */
 .surveyCard {
   margin: 40px 0;
+  height : 500px  ;
+  padding: 100px 0px;
 }
+
 .surveyCard p + h1 {
   margin-top: 28px;
+
 }
 
 /* Responsive: Portrait tablets and up */
