@@ -1,3 +1,6 @@
+// This file does not work since module.exports does not work in browsers
+// Will be modularized using browserify later
+
 var questions = [];
 
 var question_list = {
