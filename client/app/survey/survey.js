@@ -69,7 +69,7 @@ var question_list = {
 
 for (var question in question_list) {
     questions.push(question_list[question]);
-    console.log(question);
+    // console.log(question);
 }
 
 angular.module('puppyfinder.survey', [])
