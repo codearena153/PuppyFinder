@@ -12,7 +12,7 @@ app.set('port', process.env.PORT || 8888);
 mongoose.connect(db);
 
 // Middleware loads
-app.use(express.static(__dirname + '/client'));
+app.use(express.static(__dirname + '/../client'));
 app.use(express.static(__dirname + '/admin'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
