@@ -3,8 +3,13 @@
     <p>{{question.content}}</p>
     <form>
       <input type="radio" name={{question.name}} value={{question.value_01}}> {{question.option1}}<br>
-      <input type="radio" name="gender" value="female"> {{question.option2}}<br>
-      <input type="radio" name="gender" value="other"> Other
+      <input type="radio" name={{question.name}} value={{question.value_02}}> {{question.option2}}<br>
+      <input ng-show="question.value_03" type="radio" name={{question.name}} value={{question.value_03}}> {{question.option3}}<br ng-show="question.value_03">
+      <input ng-show="question.value_04" type="radio" name={{question.name}} value={{question.value_04}}> {{question.option4}}<br ng-show="question.value_04">
+      <input ng-show="question.value_05" type="radio" name={{question.name}} value={{question.value_05}}> {{question.option5}}<br ng-show="question.value_05">
+      <input ng-show="question.value_06" type="radio" name={{question.name}} value={{question.value_06}}> {{question.option6}}<br ng-show="question.value_06">
+      <input ng-show="question.value_07" type="radio" name={{question.name}} value={{question.value_07}}> {{question.option7}}
+      <!-- <input type="radio" name="default" value="other"> Other -->
     </form>
 </div>
-<a href="#/result">결과 확인하기</a>
+<a href="#/result" ng-click="sendQuery()" >결과 확인하기</a>
