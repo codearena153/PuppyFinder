@@ -1,12 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" ng-app='puppyfinder'>
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- 위에 3개의 태그는 반드시 head 태그의 처음에 위치해야함 -->
         <title>PuppyFinder</title>
+        <link href="styles/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="styles/style.css" />
     </head>
     <body>
+<<<<<<< 7d2004fc1308dac25bf8db66d2ccfff648d45f40
         <div ng-view></div>
+=======
+        <div class="container">
+            <div class="header">
+                <nav>
+                    <ul class="nav nav-pills pull-right">
+                        <li role="presentation" class="active"><a href="#/intro">Home</a></li>
+                        <li role="presentation"><a href="#/survey">Survey</a></li>
+                    </ul>
+                </nav>
+                <h3 class="text-muted">당신에게 어울리는 강아지를 찾아보세요</h3>
+            </div>
+            <div ng-view></div>
+
+        </div>
+        <footer class="footer">
+            <div class="col-md-12">
+                <span class="info">Copyright Code/States. All Rights Reserved.</span><br>
+                <span class="info">Puppy Finder Team(김형석, 윤병준, 조규진, 조상욱)</span>
+            </div>
+        </footer>
+
+        <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+        <script src="styles/bootstrap.min.js"></script>
+
+>>>>>>> (feat)add css files and jQuery with Bootstrap
         <script src="lib/angular/angular.js"></script>
         <script src="lib/angular-route/angular-route.js"></script>
 
@@ -14,5 +46,6 @@
         <script src="app/survey/survey.js"></script>
         <script src="app/result/result.js"></script>
         <script src="app/app.js"></script>
+
     </body>
 </html>

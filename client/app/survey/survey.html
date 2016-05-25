@@ -1,3 +1,4 @@
+<<<<<<< 7d2004fc1308dac25bf8db66d2ccfff648d45f40
 <div class="surveyCard" ng-repeat="question in questions">
     <h1>{{question.title}}</h1>
     <p>{{question.content}}</p>
@@ -6,5 +7,20 @@
       <input type="radio" name="gender" value="female"> {{question.option2}}<br>
       <input type="radio" name="gender" value="other"> Other
     </form>
+=======
+<div class="row surveyCard">
+        <div ng-repeat="question in questions">
+                <div class="col-lg-12">
+                    <h1>{{question.title}}</h1>
+                    <p>{{question.content}}</p>
+                    <form>
+                      <input type="radio" name="gender" value="male"> Option 1<br>
+                      <input type="radio" name="gender" value="female"> Option 2<br>
+                      <input type="radio" name="gender" value="other"> Other
+                    </form>
+                </div>
+            </div>
+    </div>
+    <a class="btn btn-lg btn-success btn-result" href="#/result" role="button">결과보기</a>
+>>>>>>> (feat)add css files and jQuery with Bootstrap
 </div>
-<a href="#/result">결과 확인하기</a>
