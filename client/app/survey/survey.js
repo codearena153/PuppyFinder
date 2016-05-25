@@ -6,6 +6,9 @@ var question_list = {
         subject : "질문01 | 생활환경",
         title: "반려견이 생활할 수 있는 야외 공간이 있나요?",
         content: "평소엔 너무나 사랑스러운 반려견도 제대로 활동할 수 있는 환경을 만들어주지 못한다면 최고의 말썽꾸러기가 되기도 합니다. 반려견을 맞이하기 전에 생활하기에 알맞은 환경을가지고 있는지 고려해 주세요",
+        name: "inside",
+        value_01: "true",
+        value_02: "false",
         option1: "네, 마당이나 뒤뜰에 공간을 마련할 수 있어요.",
         option2: "아니오, 아늑한 실내에서 키울 거예요.",
         option3: ""
@@ -66,9 +69,13 @@ var question_list = {
         subject : "질문07 | 입양",
         title: "입양 초기에 필요한 비용을 얼마로 예상하고 계신가요?",
         content: "반려견을 입양하는 데에는 생각보다 많은 초기 비용이 필요합니다. 직접적인 입양 비용 뿐만 아니라 초기에 반려견의 건강을 위해 받아야 하는 예방 접종비, 그리고 생활에 필요한 환경을 갖추기 위해 구입해야 하는 물품들의 비용까지 고려해야 합니다. 최대 얼마 정도의 입양 비용을 예상하고 계신가요?",
-        option1: "",
-        option2: "",
-        option3: ""
+        option1: 10,
+        option2: 20,
+        option3: 30,
+        option4: 40,
+        option5: 50,
+        option6: 100,
+        option7: 150
     },
 
     8: {
@@ -92,15 +99,5 @@ angular.module('puppyfinder.survey', [])
 
 .controller('SurveyController', function ($scope, $window, $location) {
     $scope.questions = questions;
-
-
-    // $scope.questions = [];
-
-    // for (var i = 0 ; i < 10 ; i++) {
-    //     var question = {};
-    //     question.title = "Title #" + (i+1);
-    //     question.content = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-    //     $scope.questions.push(question);
-    // }
 
 });

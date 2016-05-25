@@ -4,7 +4,7 @@
     <h1>{{question.title}}</h1>
     <p>{{question.content}}</p>
     <form>
-      <input type="radio" name="gender" value="male"> {{question.option1}}<br>
+      <input type="radio" name={{question.name}} value={{question.value_01}}> {{question.option1}}<br>
       <input type="radio" name="gender" value="female"> {{question.option2}}<br>
       <input type="radio" name="gender" value="other"> Other
     </form>
