@@ -133,7 +133,15 @@ angular.module('puppyfinder.survey', [])
 .controller('SurveyController', function ($scope, $window, $location, $http) {
     $scope.questions = questions;
 
-    $scope.sendQuery = function() {
+    var survey = {
+        allergic: "true",
+        friendly: "false"
+    };
 
+    $scope.sendQuery = function() {
+        return $http.post('/search', survey)
+        .success(function(res) {
+
+        })
     };
 });
