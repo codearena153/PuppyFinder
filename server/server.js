@@ -5,7 +5,7 @@ var path = require('path');
 var Puppy = require('./db/Puppy.model');
 var db = 'mongodb://localhost/puppy';
 
-const weightTbl = {
+var weightTbl = {
     ALLERGIC: {
         nope: 0,
         yeap: 1
@@ -51,7 +51,7 @@ const weightTbl = {
         MC_30: 6
     }
 
-}
+};
 
 
 var app = express();
@@ -88,6 +88,170 @@ app.get('/update', function(req, res) {
 app.get('/stat', function(req, res) {
     res.sendFile(__dirname + '/admin/stat.html');
 });
+
+app.post('/search', function(req, res) {
+    // some  code
+
+      console.log("in ask");
+      console.log('request body >>', req.body);
+
+      // first caluclate total weight
+      var total_weight = 0;
+
+      // calculating total_weight
+
+
+      switch (req.body.allergic) {
+        case 'false':
+          total_weight += weightTbl.ALLERGIC.nope;
+          break;
+        case 'true':
+          total_weight += weightTbl.ALLERGIC.yeap;
+          break;
+      }
+
+      switch (req.body.absent) {
+        case 'false':
+            total_weight += weightTbl.ABSENT.nope;
+            break;
+        case 'true':
+            total_weight += weightTbl.ABSENT.yeap;
+            break;
+      }
+
+      switch (req.body.active) {
+        case 'false':
+            total_weight += weightTbl.ACTIVE.nope;
+            break;
+        case 'true':
+            total_weight += weightTbl.ACTIVE.yeap;
+            break;
+      }
+
+      switch (req.body.single) {
+        case 'false':
+            total_weight += weightTbl.SINGLE.nope;
+            break;
+        case 'true':
+            total_weight += weightTbl.SINGLE.yeap;
+            break;
+      }
+
+      switch (req.body.friendly) {
+        case 'false':
+            total_weight += weightTbl.FRIENDLY.nope;
+            break;
+        case 'true':
+            total_weight += weightTbl.FRIENDLY.yeap;
+            break;
+        case 'default':
+            total_weight += weightTbl.FRIENDLY.whatever;
+            break;
+      }
+
+      switch (req.body.inside) {
+        case 'false':
+            total_weight += weightTbl.INSIDE.nope;
+            break;
+        case 'true':
+            total_weight += weightTbl.INSIDE.yeap;
+            break;
+        case 'default':
+            total_weight += weightTbl.INSIDE.whatever;
+            break;
+      }
+
+      switch (req.body.initialCost) {
+        case 10:
+            total_weight += weightTbl.INIT_COST.IC_10;
+            break;
+        case 20:
+            total_weight += weightTbl.INIT_COST.IC_20;
+            break;
+        case 30:
+            total_weight += weightTbl.INIT_COST.IC_30;
+            break;
+        case 50:
+            total_weight += weightTbl.INIT_COST.IC_50;
+            break;
+        case 100:
+            total_weight += weightTbl.INIT_COST.IC_100;
+            break;
+        case 150:
+            total_weight += weightTbl.INIT_COST.IC_150;
+            break;
+      }
+
+      switch (req.body.maintenance) {
+        case 5:
+            total_weight += weightTbl.MAINTENANCE.MC_5;
+            break;
+        case 10:
+            total_weight += weightTbl.MAINTENANCE.MC_10;
+            break;
+        case 15:
+            total_weight += weightTbl.MAINTENANCE.MC_15;
+            break;
+        case 20:
+            total_weight += weightTbl.MAINTENANCE.MC_20;
+            break;
+        case 25:
+            total_weight += weightTbl.MAINTENANCE.MC_25;
+            break;
+        case 30:
+            ptotal_weight += weightTbl.MAINTENANCE.MC_30;
+            break;
+      }
+
+
+
+      console.log("user's total weight", total_weight);
+      //res.send({ total_weight: total_weight });
+
+      var array;
+
+      Puppy.find().sort({ total_weight: -1 })
+      .exec(function(err, puppies) {
+        if (err) res.send('cannot retrieve data from DB');
+        else {
+          array = puppies;
+          sortArray(total_weight, array);
+          //console.log(puppy);
+          res.send(array.slice(0, 3));
+          //console.log(puppy.breed, puppy.total_weight);
+        }
+    });
+
+
+});
+
+function sortArray(total_weight, array) {
+  // total_weight와 가까운 처음 3개를 리턴
+  var arr = [];
+  console.log('total_weight', total_weight);
+  //console.log('array', array);
+
+  for (var i = 0; i < array.length; i++) {
+    var tmp = [];
+    tmp.push(array[i]);
+    tmp.push(Math.abs(total_weight - array[i].total_weight));
+    arr.push(tmp);
+  }
+
+  arr.sort(function(a, b) {
+    if (a[1] > b[1])
+      return 1;
+    else
+      return -1;
+  })
+
+  var sorted = [];
+  for (var i = 0; i < array.length; i++)
+    sorted[i] = arr[i][0];
+  console.log(sorted);
+  array = sorted;
+
+}
 
 app.post('/result', function(req, res) {
     var puppy = new Puppy();
@@ -126,12 +290,12 @@ function addWeight(puppy) {
     switch(puppy.isUserAllergic.allergic) {
         case false:
             puppy.isUserAllergic.weight = weightTbl.ALLERGIC.nope;
-            break; 
+            break;
         case true:
             puppy.isUserAllergic.weight = weightTbl.ALLERGIC.yeap;
             break;
     }
-    
+
     switch(puppy.isUserAbsent.absent) {
         case false:
             puppy.isUserAbsent.weight = weightTbl.ABSENT.nope;
@@ -140,7 +304,7 @@ function addWeight(puppy) {
             puppy.isUserAbsent.weight = weightTbl.ABSENT.yeap;
             break;
     }
-    
+
     switch(puppy.isUserActive.active) {
         case false:
             puppy.isUserActive.weight = weightTbl.ACTIVE.nope;
@@ -149,7 +313,7 @@ function addWeight(puppy) {
             puppy.isUserActive.weight = weightTbl.ACTIVE.yeap;
             break;
     }
-    
+
     switch(puppy.isUserSingle.single) {
         case false:
             puppy.isUserSingle.weight = weightTbl.SINGLE.nope;
@@ -158,7 +322,7 @@ function addWeight(puppy) {
             puppy.isUserSingle.weight = weightTbl.SINGLE.yeap;
             break;
     }
-    
+
     switch(puppy.isPuppyFriendly.friendly) {
         case "false":
             puppy.isPuppyFriendly.weight = weightTbl.FRIENDLY.nope;
@@ -170,7 +334,7 @@ function addWeight(puppy) {
             puppy.isPuppyFriendly.weight = weightTbl.FRIENDLY.whatever;
             break;
     }
-    
+
     switch(puppy.isPuppyInside.inside) {
         case "false":
             puppy.isPuppyInside.weight = weightTbl.INSIDE.nope;
@@ -183,50 +347,47 @@ function addWeight(puppy) {
             break;
     }
 
-    switch(puppy.initialCost.max) {
-        case 100000:
+    switch(puppy.initialCost.cost) {
+        case 10:
             puppy.initialCost.weight = weightTbl.INIT_COST.IC_10;
             break;
-        case 200000:
+        case 20:
             puppy.initialCost.weight = weightTbl.INIT_COST.IC_20;
             break;
-        case 300000:
+        case 30:
             puppy.initialCost.weight = weightTbl.INIT_COST.IC_30;
             break;
-        case 400000:
-            puppy.initialCost.weight = weightTbl.INIT_COST.IC_40;
-            break;
-        case 500000:
+        case 50:
             puppy.initialCost.weight = weightTbl.INIT_COST.IC_50;
             break;
-        case 1000000:
+        case 100:
             puppy.initialCost.weight = weightTbl.INIT_COST.IC_100;
             break;
-        case 1500000:
+        case 150:
             puppy.initialCost.weight = weightTbl.INIT_COST.IC_150;
             break;
-    }   
+    }
 
 
     switch(puppy.maintenance.cost) {
-        case 50000:
+        case 5:
             puppy.maintenance.weight = weightTbl.MAINTENANCE.MC_5;
             break;
-        case 100000:
+        case 10:
             puppy.maintenance.weight = weightTbl.MAINTENANCE.MC_10;
             break;
-        case 150000:
+        case 15:
             puppy.maintenance.weight = weightTbl.MAINTENANCE.MC_15;
             break;
-        case 200000:
+        case 20:
             puppy.maintenance.weight = weightTbl.MAINTENANCE.MC_20;
-            break;        
-        case 250000:
+            break;
+        case 25:
             puppy.maintenance.weight = weightTbl.MAINTENANCE.MC_25;
-            break;       
-        case 300000:
+            break;
+        case 30:
             puppy.maintenance.weight = weightTbl.MAINTENANCE.MC_30;
-            break;            
+            break;
     }
     // return total sum
     return puppy.isUserAllergic.weight +
