@@ -1,9 +1,10 @@
 /* Space out content a bit */
 body {
-  padding-top: 20px;
+  padding-top: 80px;
   padding-bottom: 20px;
   font-family : arial;
 }
+
 
 /* Everything but the puppyfinder gets side spacing for mobile first views */
 .header,
@@ -15,22 +16,21 @@ body {
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
+  padding-bottom : 20px;
+  padding-top : 20px;
+  position : fixed;
+  top : 0px;
+  left : 20px;
+  width : 100%;
 }
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
-  padding-bottom: 19px;
+  padding-bottom: 20px;
   margin-top: 0;
   margin-bottom: 0;
   line-height: 40px;
 }
 
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-}
 
 /* Customize container */
 @media (min-width: 768px) {
@@ -47,8 +47,13 @@ body {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
 }
+
+.intro h1, .intro p,  .intro a{
+  padding-bottom : 50px;
+}
+
 .intro .btn {
-  padding: 14px 24px;
+  padding: 20px 50px;
   font-size: 21px;
 }
 
@@ -85,7 +90,8 @@ body {
 
 .footer {
     text-align: center;
-    padding: 20px 0px;
+    padding: 50px 0px;
+    bottom : 20px;
 }
 
 .btn-result {
