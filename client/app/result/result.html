@@ -1,5 +1,17 @@
-<div id='intro'>
-  <h1>나에게 꼭 맞는 반려견은?</h1>
-  <h2>Grey Hound</h2>
+<div ng-app="puppyfinder.result">
+  <div class="result" ng-controller="ResultController" ng-init="init()">
+    <h1>나에게 꼭 맞는 반려견은?</h1>
+    <div>
+      <div class="mydog" ng-repeat="dog in results">
+        <h2>{{dog.breed}}</h2>
+        <h4>관련 비디오</h4>
+        <div class="relatedVideos" ng-repeat="video in dog.relatedVideos">
+          <!-- {{ video.id.videoId }} -->
+          <iframe ng-src="{{ getSrc(video) }}" frameborder="0" width="480" height="320"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <a href="#/survey">다시 테스트해보고 싶어요</a>
 </div>
