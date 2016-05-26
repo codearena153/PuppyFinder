@@ -3,11 +3,7 @@ angular.module('puppyfinder.survey', [])
 .controller('SurveyController', function ($scope, $window, $location, $http, QuestionList) {
     $scope.questions = QuestionList.questions;
     $scope.data = {
-        puppyData : {
-
-
-
-        }
+        puppyData : {}
     };
 
     $scope.debug = function() {
