@@ -12,7 +12,7 @@ angular.module('puppyfinder.result', [])
       url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBRXCXvGfojUxaVxBYannVo38Vzgj5W_fs&q='+query+'&maxResults=10&type=video&videoEmbeddable=true'
     })
     .then(function(resp){
-      console.log('response: ',resp.data.items);
+      // console.log('response: ',resp.data.items);
       return resp.data.items;
     }, function(err){
       if(err) console.error(err);
@@ -44,7 +44,7 @@ angular.module('puppyfinder.result', [])
       angular.forEach($rootScope.results, function(dog){
         Http.getYoutube(dog.breed).then(function(videos){
           dog.relatedVideos = videos;
-          console.log(dog.relatedVideos);
+          // console.log(dog.relatedVideos);
         });
       });
     };

@@ -41,8 +41,9 @@ var PuppySchema = new Schema({
     weight: Number
   },
   initialCost: {
-    min: Number,
-    max: Number,
+    //min: Number,
+    //max: Number,
+    cost: Number,
     weight: Number
   },
   maintenance: {
