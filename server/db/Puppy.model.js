@@ -15,19 +15,19 @@ var PuppySchema = new Schema({
   // User info
   // Notice that user data only accepts boolean type
   isUserAllergic: {
-    allergic: Boolean,
+    allergic: String,
     weight: Number
   },
   isUserAbsent: {
-    absent: Boolean,
+    absent: String,
     weight: Number
   },
   isUserActive : {
-    active: Boolean,
+    active: String,
     weight: Number
   },
   isUserSingle: {
-    single: Boolean,
+    single: String,
     weight: Number
   },
 

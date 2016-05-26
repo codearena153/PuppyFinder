@@ -2,11 +2,16 @@ angular.module('puppyfinder.survey', [])
 
 .controller('SurveyController', function ($scope, $window, $location, $http, QuestionList) {
     $scope.questions = QuestionList.questions;
-    console.log("Does QuestionList Factory work? ", QuestionList.questions);
+    $scope.data = {
+        puppyData : {
 
-    var survey = {
-        allergic: "true",
-        friendly: "false"
+
+
+        }
+    };
+
+    $scope.debug = function() {
+        console.log("Survey received: ", $scope.data.puppyData);
     };
 
     $scope.sendQuery = function() {
@@ -16,3 +21,4 @@ angular.module('puppyfinder.survey', [])
         });
     };
 });
+
