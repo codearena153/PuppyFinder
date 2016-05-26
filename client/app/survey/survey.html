@@ -1,4 +1,6 @@
-<div class="surveyCard" ng-repeat="question in questions">
+<div class="row surveyCard " ng-repeat="question in questions">
+  <div class="col-lg-12 table">
+    <h5>{{question.subject}}</h5>
     <h1>{{question.title}}</h1>
     <p>{{question.content}}</p>
     <form>
@@ -6,5 +8,7 @@
       <input type="radio" name="gender" value="female"> {{question.option2}}<br>
       <input type="radio" name="gender" value="other"> Other
     </form>
+  </div>
+  <a class="btn btn-lg btn-success btn-result" href="#/survey" role="button" data-ng-show='$first || $middle'>다음 질문</a>
+  <a class="btn btn-lg btn-success btn-result" href="#/result" role="button" data-ng-show='$last'>나에게 맞는 반려견 보기</a>
 </div>
-<a href="#/result">결과 확인하기</a>
