@@ -1,18 +1,19 @@
 var express = require('express');
-var mongoose = require('mongoose');
+// var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var path = require('path');
 var Puppy = require('./db/Puppy.model');
-var db = 'mongodb://localhost/puppy';
+// var db = 'mongodb://localhost/puppy';
 var calculateTotalWeight = require('./config/helpers.js').calculateTotalWeight;
-var addWeight = require('./config/helpers.js').addWeight;
-var sortArray = require('./config/helpers.js').sortArray;
+var addWeight = require('./config/helpers').addWeight;
+var sortArray = require('./config/helpers').sortArray;
+var initDB = require('./config/init');
+
+// drop collection and add insert new puppy documents into local DB
+initDB();
 
 var app = express();
 app.set('port', process.env.PORT || 8888);
-
-// Connects mongo DB
-mongoose.connect(db);
 
 // Middleware loads
 app.use(express.static(__dirname + '/../client'));
@@ -62,8 +63,8 @@ app.get('/puppies', function(req, res) {
       res.send(puppy);
       //console.log(puppy.breed, puppy.total_weight);
     }
-  })
-})
+  });
+});
 
 app.get('/puppies/:breed', function(req, res) {
   console.log('getting ' + breed);
@@ -76,9 +77,8 @@ app.get('/puppies/:breed', function(req, res) {
       console.log(puppy);
       res.send(puppy);
     }
-
-  })
-})
+  });
+});
 
 
 app.delete('/puppies/:breed', function(req, res) {
@@ -96,10 +96,10 @@ app.delete('/puppies/:breed', function(req, res) {
         else {
           res.send(puppy);
         }
-      })
+      });
     }
-  })
-})
+  });
+});
 
 
 app.put('/puppies/:id', function(req, res) {
@@ -122,7 +122,6 @@ app.put('/puppies/:id', function(req, res) {
 
     puppy.total_weight = total_weight;
     //console.log('updated puppy >>>>>>>>>', puppy);
-    res.send(puppy);
     /*
     puppy.save(function(err) {
       if (err) {
@@ -133,11 +132,7 @@ app.put('/puppies/:id', function(req, res) {
       }
     })
     */
-
   });
-
-  //console.log('in put, value of breed is', req.body.breed);
-
 });
 
 app.post('/search', function(req, res) {
@@ -156,9 +151,7 @@ app.post('/search', function(req, res) {
         else {
           array = puppies;
           sortArray(total_weight, array);
-          //console.log(puppy);
           res.send(array.slice(0, 3));
-          //console.log(puppy.breed, puppy.total_weight);
         }
     });
 });
@@ -178,8 +171,9 @@ app.post('/result', function(req, res) {
     puppy.isPuppyInside.inside = req.body.inside;
     puppy.initialCost.cost = req.body.initialCost;
     puppy.maintenance.cost = req.body.maintenance;
-
     puppy.total_weight = addWeight(puppy);
+
+    console.log("created puppy: ", puppy);
 
     puppy.save(function(err, puppy) {
       if (err)  res.send("error saving new puppy");
