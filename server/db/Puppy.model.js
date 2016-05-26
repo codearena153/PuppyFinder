@@ -15,19 +15,19 @@ var PuppySchema = new Schema({
   // User info
   // Notice that user data only accepts boolean type
   isUserAllergic: {
-    allergic: Boolean,
+    allergic: String,
     weight: Number
   },
   isUserAbsent: {
-    absent: Boolean,
+    absent: String,
     weight: Number
   },
   isUserActive : {
-    active: Boolean,
+    active: String,
     weight: Number
   },
   isUserSingle: {
-    single: Boolean,
+    single: String,
     weight: Number
   },
 
@@ -41,8 +41,6 @@ var PuppySchema = new Schema({
     weight: Number
   },
   initialCost: {
-    //min: Number,
-    //max: Number,
     cost: Number,
     weight: Number
   },
@@ -57,48 +55,6 @@ var PuppySchema = new Schema({
     type: Number,
     default: 0
   }
-
-  // size: {
-  //   size: String,
-  //   weight: Number
-  // },
-  // taste: {
-  //   taste: String,
-  //   weight: Number
-  // },
-  // cost: {
-  //   cost: String,
-  //   weight: Number
-  // },
-  // residence: {
-  //   residence: String,
-  //   weight: Number
-  // },
-  // family_size: {
-  //   family_size: String,
-  //   weight: Number
-  // },
-  // affinity: {
-  //   affinity: String,
-  //   weight: Number
-  // },
-  // price: {
-  //   price: String,
-  //   weight: Number
-  // },
-  // color: {
-  //   color: String,
-  //   weight: Number
-  // },
-  // guard: {
-  //   guard: Boolean,
-  //   weight: Number
-  // },
-  // athletic: {
-  //   athletic: String,
-  //   weight: Number
-  // },
-
 }, {
   collection: 'puppies'
 });

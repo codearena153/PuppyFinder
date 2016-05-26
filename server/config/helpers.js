@@ -151,43 +151,41 @@ exports.calculateTotalWeight = function(data) {
           total_weight += weightTbl.MAINTENANCE.MC_30;
           break;
     }
-
-    // return total_weight;
 };
 
 exports.addWeight = function(puppy) {
     switch(puppy.isUserAllergic.allergic) {
-        case false:
+        case "false":
             puppy.isUserAllergic.weight = weightTbl.ALLERGIC.nope;
             break;
-        case true:
+        case "true":
             puppy.isUserAllergic.weight = weightTbl.ALLERGIC.yeap;
             break;
     }
 
     switch(puppy.isUserAbsent.absent) {
-        case false:
+        case "false":
             puppy.isUserAbsent.weight = weightTbl.ABSENT.nope;
             break;
-        case true:
+        case "true":
             puppy.isUserAbsent.weight = weightTbl.ABSENT.yeap;
             break;
     }
 
     switch(puppy.isUserActive.active) {
-        case false:
+        case "false":
             puppy.isUserActive.weight = weightTbl.ACTIVE.nope;
             break;
-        case true:
+        case "true":
             puppy.isUserActive.weight = weightTbl.ACTIVE.yeap;
             break;
     }
 
     switch(puppy.isUserSingle.single) {
-        case false:
+        case "false":
             puppy.isUserSingle.weight = weightTbl.SINGLE.nope;
             break;
-        case true:
+        case "true":
             puppy.isUserSingle.weight = weightTbl.SINGLE.yeap;
             break;
     }
@@ -259,15 +257,15 @@ exports.addWeight = function(puppy) {
             break;
     }
 
-    // console.log("puppy,isUserAllergic.weight: ", puppy.isUserAllergic.weight);
-    // console.log("puppy,isUserAbsent.weight: ", puppy.isUserAbsent.weight);
-    // console.log("puppy.isUserActive.weight: ", puppy.isUserActive.weight);
-    // console.log("puppy.isUserSingle.weight: ", puppy.isUserSingle.weight);
-    // console.log("puppy.isPuppyFriendly.weight:  ", puppy.isPuppyFriendly.weight);
-    // console.log("puppy.isPuppyInside.weight: ", puppy.isPuppyInside.weight);
-    // console.log("puppy.initialCost.weight: ", puppy.initialCost.weight);
-    // console.log("puppy.initialCost.cost: ", puppy.initialCost.cost);
-    // console.log("puppy.maintenance.weight: ", puppy.maintenance.weight);
+    console.log("puppy.isUserAllergic.weight: ", puppy.isUserAllergic.weight);
+    console.log("puppy.isUserAbsent.weight: ", puppy.isUserAbsent.weight);
+    console.log("puppy.isUserActive.weight: ", puppy.isUserActive.weight);
+    console.log("puppy.isUserSingle.weight: ", puppy.isUserSingle.weight);
+    console.log("puppy.isPuppyFriendly.weight:  ", puppy.isPuppyFriendly.weight);
+    console.log("puppy.isPuppyInside.weight: ", puppy.isPuppyInside.weight);
+    console.log("puppy.initialCost.weight: ", puppy.initialCost.weight);
+    console.log("puppy.initialCost.cost: ", puppy.initialCost.cost);
+    console.log("puppy.maintenance.weight: ", puppy.maintenance.weight);
 
     // return total sum
     return puppy.isUserAllergic.weight +
@@ -298,11 +296,11 @@ exports.sortArray = function(total_weight, array) {
         return 1;
       else
         return -1;
-    })
+    });
 
     var sorted = [];
     for (var i = 0; i < array.length; i++)
       sorted[i] = arr[i][0];
     console.log(sorted);
     array = sorted;
-}
+};
