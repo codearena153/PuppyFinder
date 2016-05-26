@@ -6,6 +6,7 @@ var Puppy = require('./db/Puppy.model');
 var db = 'mongodb://localhost/puppy';
 var calculateTotalWeight = require('./config/helpers.js').calculateTotalWeight;
 var addWeight = require('./config/helpers.js').addWeight;
+var sortArray = require('./config/helpers.js').sortArray;
 
 var app = express();
 app.set('port', process.env.PORT || 8888);
@@ -141,9 +142,10 @@ app.put('/puppies/:id', function(req, res) {
 
 app.post('/search', function(req, res) {
 
+    console.log("/search - Receieved req: ", req);
     var total_weight = calculateTotalWeight(req.body);
 
-    console.log("user data's total weight", total_weight);
+    // console.log("user data's total weight", total_weight);
 
     var array;
 

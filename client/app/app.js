@@ -15,8 +15,7 @@ angular.module('puppyfinder', [
             controller: 'IntroController'
         })
         .when('/survey', {
-            // templateUrl: 'app/survey/survey.html',
-            templateUrl: 'app/survey/survey_new.html',
+            templateUrl: 'app/survey/survey.html',
             controller: 'SurveyController',
         })
         .when('/result', {

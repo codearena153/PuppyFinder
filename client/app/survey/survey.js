@@ -6,14 +6,18 @@ angular.module('puppyfinder.survey', [])
         puppyData : {}
     };
 
-    $scope.debug = function() {
-        console.log("Survey received: ", $scope.data.puppyData);
-    };
+    // $scope.debug = function() {
+    //     console.log("Survey received: ", $scope.data.puppyData);
+    // };
+
+    // var survey = $scope.data.puppyData;
+    // console.log("updated survey data: ", survey);
 
     $scope.sendQuery = function() {
-        return $http.post('/search', survey)
+        return $http.post('/search', $scope.data.puppyData)
         .success(function(res) {
-            // some code
+            console.log("sendQuery - success - res: ", res);
+            var results = res;
         });
     };
 });
