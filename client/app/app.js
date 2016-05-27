@@ -24,6 +24,11 @@ angular.module('puppyfinder', [
         })
         .otherwise('/intro');
 })
+
+.controller('AppController', function($window){
+  $window.results = [];
+})
+
 .factory('QuestionList', function() {
     // should return the array of questions
     var questions = [];
@@ -195,8 +200,14 @@ angular.module('puppyfinder', [
 
 .factory('Result', function($http){
 
-  var getResults = function(){
-    // 서버에 survey 결과 요청하는 function
+  var getResults = function(data){
+    return $http.post('/search', data)
+    .then(function(resp) {
+        console.log("sendQuery - success - response: ", resp);
+        return resp;
+    }, function(err){
+      if(err) return err;
+    });
   };
 
   return({
