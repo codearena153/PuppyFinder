@@ -17,6 +17,10 @@ angular.module('puppyfinder.survey', [])
       Result.getResults($scope.data.puppyData)
       .then(function(resp){
         $window.results = resp.data;
+        return 1;
+      })
+      .then(function(ok){
+        $location.path('/result');
       });
     };
 });
