@@ -1,6 +1,6 @@
 angular.module('puppyfinder.survey', [])
 
-.controller('SurveyController', function ($scope, $window, $location, $http, QuestionList) {
+.controller('SurveyController', function ($scope, $window, $location, $http, QuestionList, Result) {
     $scope.questions = QuestionList.questions;
     $scope.data = {
         puppyData : {}
@@ -14,11 +14,13 @@ angular.module('puppyfinder.survey', [])
     // console.log("updated survey data: ", survey);
 
     $scope.sendQuery = function() {
-        return $http.post('/search', $scope.data.puppyData)
-        .success(function(res) {
-            console.log("sendQuery - success - res: ", res);
-            var results = res;
-        });
+      Result.getResults($scope.data.puppyData)
+      .then(function(resp){
+        $window.results = resp.data;
+        return 1;
+      })
+      .then(function(ok){
+        $location.path('/result');
+      });
     };
 });
-
