@@ -159,4 +159,47 @@ angular.module('puppyfinder', [
     return ({
         questions: questions
     });
+})
+
+.factory('Related', function($http){
+
+  var getYoutube = function(query){
+    return $http({
+      method: 'GET',
+      url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBRXCXvGfojUxaVxBYannVo38Vzgj5W_fs&q='+query+'&maxResults=1&type=video&videoEmbeddable=true'
+    })
+    .then(function(resp){
+      // console.log('response: ',resp.data.items);
+      return resp.data.items;
+    }, function(err){
+      if(err) console.error(err);
+    });
+  };
+
+  var getInstagram = function(query){
+    return $http({
+      //
+    })
+    .then(function(resp){
+      return resp;
+    }, function(err){
+      if(err) return err;
+    });
+  };
+
+  return({
+    getYoutube: getYoutube,
+    getInstagram: getInstagram,
+  });
+})
+
+.factory('Result', function($http){
+
+  var getResults = function(){
+    // 서버에 survey 결과 요청하는 function
+  };
+
+  return({
+    getResults: getResults,
+  });
 });
