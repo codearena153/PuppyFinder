@@ -114,13 +114,13 @@ angular.module('puppyfinder', [
             content: "반려견을 입양하는 데에는 생각보다 많은 초기 비용이 필요합니다. 직접적인 입양 비용 뿐만 아니라 초기에 반려견의 건강을 위해 받아야 하는 예방 접종비, 그리고 생활에 필요한 환경을 갖추기 위해 구입해야 하는 물품들의 비용까지 고려해야 합니다. 최대 얼마 정도의 입양 비용을 예상하고 계신가요?",
             name: "initialCost",
             options: [
-              { value: 10, text: 10 },
-              { value: 20, text: 20 },
-              { value: 30, text: 30 },
-              { value: 40, text: 40 },
-              { value: 50, text: 50 },
-              { value: 100, text: 100 },
-              { value: 150, text: 150 },
+              { value: 10, text: "10 만원" },
+              { value: 20, text: "20 만원" },
+              { value: 30, text: "30 만원" },
+              { value: 40, text: "40 만원" },
+              { value: 50, text: "50 만원" },
+              { value: 100, text: "100 만원" },
+              { value: 150, text: "150 만원" },
             ]
         },
 
@@ -131,12 +131,12 @@ angular.module('puppyfinder', [
             content: "반려견을 키우는 일을 생각보다 꾸준하게, 예상 외의 지출을 필요로 합니다. 멋있어 보여서 대형견을 입양했다가 식비를 감당하지 못하고 파양하는 경우도 많답니다. s한 달에 평균적으로 지출하실 수 있는 양육비용을 알려 주세요.",
             name: "maintenance",
             options: [
-              { value: 5, text: 5 },
-              { value: 10, text: 10 },
-              { value: 15, text: 15 },
-              { value: 20, text: 20 },
-              { value: 25, text: 25 },
-              { value: 30, text: 30 },
+              { value: 5, text: "5 만원" },
+              { value: 10, text: "10 만원" },
+              { value: 15, text: "15 만원" },
+              { value: 20, text: "20 만원" },
+              { value: 25, text: "25 만원" },
+              { value: 30, text: "30 만원" },
             ]
         }
 
