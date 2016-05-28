@@ -2,9 +2,125 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <title>관리자 페이지</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
+
+  <script src="add.js"></script>
+
+  <meta charset="utf-8">
   <title>Puppy 추가</title>
 </head>
-<body>
+<body ng-app="AddApp">
+
+  <div class="container" ng-controller="AddController">
+    <h1 style="text-align: center">관리자 페이지(추가)</h1>
+
+    <div class="add-field" ng-show="inputShow">
+      견종: 
+      <input type="text" name="breed" maxlength="20" required value="{{puppy.breed}}" ng-model="puppy.breed"><br><br>
+
+      설명: <textarea name="description" rows=10 cols=80 required maxlength="512" ng-model="puppy.description">{{puppy.description}}</textarea><br><br>
+
+      이미지: <input type="text" name="image" value="{{puppy.image}}" ng-model="puppy.image"><br><br>
+
+      털빠짐 유무:
+      <select ng-model="puppy.isUserAllergic.allergic" ng-init="puppy.isUserAllergic.allergic='true'">
+        <option ng-repeat="a in allergic" value="{{a[0]}}">
+          {{a[1]}}
+        </option>
+      </select>
+
+      집 지키미: 
+      <select ng-model="puppy.isUserAbsent.absent" ng-init="puppy.isUserAbsent.absent='true'" >
+        <option ng-repeat="a in absent" value="{{a[0]}}">
+          {{a[1]}}
+        </option>
+      </select>    
+
+      개 활동성:
+      <select ng-model="puppy.isUserActive.active" ng-init="puppy.isUserActive.active='true'">
+        <option ng-repeat="a in active" value="{{a[0]}}">
+          {{a[1]}}
+        </option>
+      </select>       
+
+      개 독립성:
+      <select ng-model="puppy.isUserSingle.single" ng-init="puppy.isUserSingle.single='true'">
+        <option ng-repeat="s in single" value="{{s[0]}}">
+          {{s[1]}}
+        </option>
+      </select>
+      <br><br>
+
+      개 친화력:
+      <select ng-model="puppy.isPuppyFriendly.friendly" ng-init="puppy.isPuppyFriendly.friendly='true'">
+        <option ng-repeat="f in friendly" value="{{f[0]}}">
+          {{f[1]}}
+        </option>
+      </select>
+
+      개 사육 장소:
+      <select ng-model="puppy.isPuppyInside.inside" ng-init="puppy.isPuppyInside.inside='true'">
+        <option ng-repeat="i in inside" value="{{i[0]}}">
+          {{i[1]}}
+        </option>
+      </select>
+      
+      최대가격대(만원):
+      <input type="number" ng-min="10" ng-max="150" ng-maxlength="3" ng-model="puppy.initialCost.cost" value="{{puppy.initialCost.cost}}"> 
+      <br><br>
+
+      최대양육비용(만원):
+      <input type="number" ng-min="5" ng-max="30" ng-maxlength="3" ng-model="puppy.maintenance.cost" value="{{puppy.maintenace.cost}}">
+      <br><br>
+
+      <button ng-click="add(puppy)" class="btn btn-primary btn-lg">
+        추가</span>
+      </button>
+    </div>
+  
+    <div class="show-table" ng-show="tableShow">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>
+            견종: {{puppy.breed}}이 추가되었습니다.
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{puppy.description}}</td>
+        </tr>
+        <tr>
+          <td>
+            <button ng-click="goback()" class="btn btn-success btn-lg">
+              OK
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+  </div>
+
+
+
+
+<!--
   <h1>Puppy 추가</h1>
 
   <form method="post" action="/result">
@@ -58,7 +174,7 @@
 
     <input type="submit" value="add">
   </form>
-
+-->
 
 </body>
 </html>
