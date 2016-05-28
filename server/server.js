@@ -1,7 +1,9 @@
 var express = require('express');
 // var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var url = require('url');
 var path = require('path');
+var request = require('request');
 var Puppy = require('./db/Puppy.model');
 // var db = 'mongodb://localhost/puppy';
 var calculateTotalWeight = require('./config/helpers.js').calculateTotalWeight;
@@ -138,6 +140,7 @@ app.put('/puppies/:id', function(req, res) {
 app.get('/search', function(req, res) {
 
     console.log("/search - Receieved req: ", req);
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", req.body);
     var total_weight = calculateTotalWeight(req.body);
 
     // console.log("user data's total weight", total_weight);
@@ -182,6 +185,64 @@ app.post('/result', function(req, res) {
         res.send(puppy);
       }
     });
+});
+
+app.get('/tweets', function(req, res){
+  var url_parts = url.parse(req.url, true);
+  var query = url_parts.query;
+  console.log(query);
+
+  var oauthToken;
+
+  request.post({
+    url: "https://api.twitter.com/oauth2/token",
+    headers: {
+      'Authorization': 'Basic ' + query.token,
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    },
+    body: 'grant_type=client_credentials'
+    }, function(err, res, body){
+      console.log('BODY', body);
+      console.log('RES', res);
+    });
+  // $http.post({
+  //   method: 'POST',
+  //   url:'https://api.twitter.com/oauth2/token',
+  //   headers: {
+      // 'Authorization': 'Basic ' + encodedToken,
+      // 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+  //   },
+  //   data: {
+  //     'grant_type': 'client_credentials'
+  //   },
+  // }).then(function(resp){
+  //     console.log(resp);
+  //     aouthToken= resp;
+  //   }, function(err){
+  //     if(err) return err;
+  // });
+  //
+  // var url = 'https://api.twitter.com/1.1/search/tweets.json?'+
+  // 'q='+ hashtag +
+  // '%20filter%3Aimages' +
+  // '&result_type=' + 'recent';
+  //
+  // return $http({
+  //   method: 'GET',
+  //   url: url,
+  //   headers: {
+  //     'Authorization': 'Bearer '+ aouthToken,
+  //
+  //   },
+  //   data: {count: 12}
+  // })
+  // .then(function(resp){
+  //     console.log(resp);
+  //     return resp;
+  //   }, function(err){
+  //     if(err) return err;
+  //   });
+  res.send(query);
 });
 
 app.listen(app.get('port'), function() {

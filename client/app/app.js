@@ -2,7 +2,8 @@ angular.module('puppyfinder', [
     'puppyfinder.intro',
     'puppyfinder.survey',
     'puppyfinder.result',
-    'ngRoute'
+    'ngRoute',
+    'base64'
 ])
 .config(function ($routeProvider, $httpProvider) {
     $routeProvider
@@ -23,10 +24,14 @@ angular.module('puppyfinder', [
             controller: 'ResultController'
         })
         .otherwise('/intro');
+
+
+
 })
 
 .controller('AppController', function($window){
   $window.results = [];
+
 })
 
 .factory('QuestionList', function() {
@@ -151,12 +156,18 @@ angular.module('puppyfinder', [
     });
 })
 
-.factory('Related', function($http){
+.factory('RelatedContents', function($http, $base64){
 
   var getYoutube = function(query){
     return $http({
       method: 'GET',
-      url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBRXCXvGfojUxaVxBYannVo38Vzgj5W_fs&q='+query+'&maxResults=1&type=video&videoEmbeddable=true'
+      url: 'https://www.googleapis.com/youtube/v3/search?'+
+      'part=' + 'snippet' +
+      '&key=' + 'AIzaSyBRXCXvGfojUxaVxBYannVo38Vzgj5W_fs' +
+      '&q=' + query +
+      '&maxResults=' + 1 +
+      '&type=' + 'video' +
+      '&videoEmbeddable=' + 'true'
     })
     .then(function(resp){
       // console.log('response: ',resp.data.items);
@@ -166,27 +177,90 @@ angular.module('puppyfinder', [
     });
   };
 
-  var getInstagram = function(query){
-    return $http({
+  // var getInstagram = function(hashtag){
+  //   return $http({
+  //     method: 'GET',
+  //     url: 'https://api.instagram.com/v1/tags/' + hashtag + '/media/recent' +
+  //     '?client_id=' + '642176ece1e7445e99244cec26f4de1f&',
+  //   })
+  //   .then(function(resp){
+  //     console.log(resp);
+  //     return resp;
+  //   }, function(err){
+  //     if(err) return err;
+  //   });
+  // };
+
+    var getTwitter = function(hashtag){
+      var conToken = $base64.encode('736396467762434049-3tFlbAmVnmKuKImjt9MjlJcxLS0wgN4:an3INnVqbTr89YRj93KNkyy8t72P4YFqEUu09AvCL0gBz');
+      var data = {
+        token: conToken,
+        hashtag: hashtag,
+      };
+      return $http({
+        method: 'GET',
+        url: '/tweets',
+        params: data,
+      })
+      .then(function(resp){
+          return resp;
+        }, function(err){
+          if(err) return err;
+      });
+
+      // $http.post({
+      //   method: 'POST',
+      //   url:'https://api.twitter.com/oauth2/token',
+      //   headers: {
+      //     'Authorization': 'Basic ' + encodedToken,
+      //     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+      //   },
+      //   data: {
+      //     'grant_type': 'client_credentials'
+      //   },
+      // }).then(function(resp){
+      //     console.log(resp);
+      //     aouthToken= resp;
+      //   }, function(err){
+      //     if(err) return err;
+      // });
       //
-    })
-    .then(function(resp){
-      return resp;
-    }, function(err){
-      if(err) return err;
-    });
-  };
+      // var url = 'https://api.twitter.com/1.1/search/tweets.json?'+
+      // 'q='+ hashtag +
+      // '%20filter%3Aimages' +
+      // '&result_type=' + 'recent';
+      //
+      // return $http({
+      //   method: 'GET',
+      //   url: url,
+      //   headers: {
+      //     'Authorization': 'Bearer '+ aouthToken,
+      //
+      //   },
+      //   data: {count: 12}
+      // })
+      // .then(function(resp){
+      //     console.log(resp);
+      //     return resp;
+      //   }, function(err){
+      //     if(err) return err;
+      //   });
+    };
 
   return({
     getYoutube: getYoutube,
-    getInstagram: getInstagram,
+    getTwitter: getTwitter,
   });
 })
 
 .factory('Result', function($http){
 
   var getResults = function(data){
-    return $http.get('/search', data)
+    return $http({
+      method: 'GET',
+      url: '/search',
+      params: data,
+    })
     .then(function(resp) {
         console.log("sendQuery - success - response: ", resp);
         return resp;
