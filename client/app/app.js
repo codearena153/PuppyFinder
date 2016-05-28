@@ -25,8 +25,6 @@ angular.module('puppyfinder', [
         })
         .otherwise('/intro');
 
-
-
 })
 
 .controller('AppController', function($window){
@@ -164,7 +162,7 @@ angular.module('puppyfinder', [
       url: 'https://www.googleapis.com/youtube/v3/search?'+
       'part=' + 'snippet' +
       '&key=' + 'AIzaSyBRXCXvGfojUxaVxBYannVo38Vzgj5W_fs' +
-      '&q=' + query +
+      '&q=' + query +' 개'+
       '&maxResults=' + 1 +
       '&type=' + 'video' +
       '&videoEmbeddable=' + 'true'
