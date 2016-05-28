@@ -14,12 +14,15 @@ angular.module('puppyfinder.result', [])
           // console.log(dog.relatedVideos);
         });
 
-        var hashtag = dog.breed.replace(/ /gi, '');
-        console.log(hashtag);
+        var q = dog.breed.replace(/ /gi, '');
+        // console.log(hashtag);
 
-        RelatedContents.getTwitter(hashtag)
+        RelatedContents.getDaum(q)
         .then(function(photos){
+          dog.relatedPhotos = photos.data.channel.item;
           console.log(photos);
+          // dog.relatedPhotos = photos.data.items;
+
         });
       });
     };
@@ -27,5 +30,9 @@ angular.module('puppyfinder.result', [])
     $scope.getSrc = function(video){
       return $sce.trustAsResourceUrl("https://www.youtube.com/embed/"+video.id.videoId);
     };
+
+    // $scope.getPholarSrc = function(breed){
+    //   return $sce.trustAsResourceUrl("http://www.pholar.co/gallery/postTag?tag="+breed);
+    // };
 
 });

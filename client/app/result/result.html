@@ -1,16 +1,23 @@
 <div id='intro' ng-app="puppyfinder.result">
-  <div class="result" ng-controller="ResultController" ng-init="init()">
-    <h1>나에게 꼭 맞는 반려견은?</h1>
-    <div>
-      <div class="mydog" ng-repeat="dog in results">
-        <h2>{{dog.breed}}</h2>
-        <h4>관련 비디오</h4>
-        <div class="relatedVideos" ng-repeat="video in dog.relatedVideos">
-          <!-- {{ video.id.videoId }} -->
-          <iframe ng-src="{{ getSrc(video) }}" frameborder="0" width="480" height="320"></iframe>
+    <div class="result" ng-controller="ResultController" ng-init="init()">
+        <h1>나에게 꼭 맞는 반려견은?</h1>
+        <div>
+            <div class="mydog" ng-repeat="dog in results">
+                <h2>{{dog.breed}}</h2>
+                <h4>관련 비디오</h4>
+                <div class="relatedVideos" ng-repeat="video in dog.relatedVideos">
+                    <!-- {{ video.id.videoId }} -->
+                    <iframe ng-src="{{ getSrc(video) }}" frameborder="0" width="640" height="400"></iframe>
+                </div>
+                <div class="photos">
+                  <!-- <div ng-repeat="photo in dog.relatedPhotos"> -->
+                    <img  ng-repeat="photo in dog.relatedPhotos" ng-src="{{photo.thumbnail}}" />
+                    <!-- <img ng-src="{{photo.link}}" /> -->
+
+                  <!-- </div> -->
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <a class="btn btn-lg btn-success  btn-result" href="#/survey" role="button">테스트 다시하기</a>
+    <a class="btn btn-lg btn-success  btn-result" href="#/survey" role="button">테스트 다시하기</a>
 </div>

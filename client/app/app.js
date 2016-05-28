@@ -191,22 +191,51 @@ angular.module('puppyfinder', [
   //   });
   // };
 
-    var getTwitter = function(hashtag){
-      var conToken = $base64.encode('736396467762434049-3tFlbAmVnmKuKImjt9MjlJcxLS0wgN4:an3INnVqbTr89YRj93KNkyy8t72P4YFqEUu09AvCL0gBz');
-      var data = {
-        token: conToken,
-        hashtag: hashtag,
+    // var getPholar = function(hashtag){
+    //
+    //   var data = {
+    //     hashtag: hashtag,
+    //   };
+    //
+    //   return $http({
+    //     method: 'GET',
+    //     url: '/pholar',
+    //     params: data,
+    //   })
+    //   .then(function(resp){
+    //       return resp;
+    //     }, function(err){
+    //       if(err) return err;
+    //   });
+
+      var getDaum = function(query){
+
+        // return $http.jsonp('https://apis.daum.net/search/image?apikey=0a82237676f6eb236ee760a0912ec05f&q='+query+'result=20')
+
+        var data = {
+            q: query,
+          };
+
+        // return $http({
+        //       method: 'GET',
+        //       url: 'https://www.googleapis.com/customsearch/v1?q='+query +'&cx=007711437540587242288%3A1tx-m0h4ejq&excludeTerms=postfiles12.naver.net&imgSize=large&imgType=photo&searchType=image&key=AIzaSyAIrtttKYKEIsLA1sdftk50R3xj3a5krvM',
+        //       // params: data,
+        // })
+        return $http({
+              method: 'GET',
+              url: '/daum',
+              params: data,
+        })
+        .success(function(resp){
+            // console.log(resp);
+            return resp;
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+
       };
-      return $http({
-        method: 'GET',
-        url: '/tweets',
-        params: data,
-      })
-      .then(function(resp){
-          return resp;
-        }, function(err){
-          if(err) return err;
-      });
+
 
       // $http.post({
       //   method: 'POST',
@@ -245,11 +274,10 @@ angular.module('puppyfinder', [
       //   }, function(err){
       //     if(err) return err;
       //   });
-    };
 
   return({
     getYoutube: getYoutube,
-    getTwitter: getTwitter,
+    getDaum: getDaum,
   });
 })
 
