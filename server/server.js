@@ -135,7 +135,7 @@ app.put('/puppies/:id', function(req, res) {
   });
 });
 
-app.post('/search', function(req, res) {
+app.get('/search', function(req, res) {
 
     console.log("/search - Receieved req: ", req);
     var total_weight = calculateTotalWeight(req.body);

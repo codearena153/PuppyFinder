@@ -38,7 +38,7 @@ angular.module('puppyfinder', [
             index : "slide1",
             subject : "질문01 | 생활환경",
             title: "반려견이 생활할 수 있는 야외 공간이 있나요?",
-            content: "평소엔 너무나 사랑스러운 반려견도 제대로 활동할 수 있는 환경을 만들어주지 못한다면 최고의 말썽꾸러기가 되기도 합니다. 반려견을 맞이하기 전에 생활하기에 알맞은 환경을가지고 있는지 고려해 주세요",
+            content: "평소엔 너무나 사랑스러운 반려견도 제대로 활동할 수 있는 환경을 만들어주지 못한다면 최고의 말썽꾸러기가 되기도 합니다. 반려견을 맞이하기 전에 생활하기에 알맞은 환경을가지고 있는지 고려해 주세요.",
             name: "inside",
             options: [
               { value: "true", text: "네, 마당이나 뒤뜰에 공간을 마련할 수 있어요" },
@@ -128,7 +128,7 @@ angular.module('puppyfinder', [
             index : "slide8",
             subject : "질문08 | 생활환경",
             title: "한 달에 얼마 정도의 양육비용을 예상하고 계신가요?",
-            content: "반려견을 키우는 일을 생각보다 꾸준하게, 예상 외의 지출을 필요로 합니다. 멋있어 보여서 대형견을 입양했다가 식비를 감당하지 못하고 파양하는 경우도 많답니다. s한 달에 평균적으로 지출하실 수 있는 양육비용을 알려 주세요.",
+            content: "반려견을 키우는 일을 생각보다 꾸준하게, 예상 외의 지출을 필요로 합니다. 멋있어 보여서 대형견을 입양했다가 식비를 감당하지 못하고 파양하는 경우도 많답니다. 한 달에 평균적으로 지출하실 수 있는 양육비용을 알려 주세요.",
             name: "maintenance",
             options: [
               { value: 5, text: "5 만원" },
@@ -186,7 +186,7 @@ angular.module('puppyfinder', [
 .factory('Result', function($http){
 
   var getResults = function(data){
-    return $http.post('/search', data)
+    return $http.get('/search', data)
     .then(function(resp) {
         console.log("sendQuery - success - response: ", resp);
         return resp;
