@@ -23,4 +23,7 @@ angular.module('puppyfinder.survey', [])
         $location.path('/result');
       });
     };
+
+    $scope.width = window.innerWidth;
+    $scope.height = window.innerHeight;
 });

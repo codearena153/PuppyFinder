@@ -1,9 +1,8 @@
+<md-content>
 <form name="survey" ng-submit="sendQuery()">
-  <p>
-    {{data.puppyData}}
-  </p>
-  <div class="row surveyCard " ng-repeat="question in questions">
-    <div class="col-lg-12 table">
+<md-virtual-repeat-container layout="column" ng-style="{'height': (height)+'px'}">
+  <div md-virtual-repeat="question in questions" ng-style="{'height': (height)+'px'}" layout="column" layout-align="center center">
+    <md-card>
       <h5>{{question.subject}}</h5>
       <h1>{{question.title}}</h1>
       <p>{{question.content}}</p>
@@ -13,8 +12,11 @@
           <span>{{option.text}}</span> <br />
         </label>
       </fieldset>
-      <button class="btn btn-lg btn-success btn-result" role="button" data-ng-show="$first || $middle" ng-disabled="!data.puppyData[question.name]" type="button" >다음 질문</button>
-      <input type="submit" class="btn btn-lg btn-success btn-result" role="button" data-ng-show="$last" value="나에게 맞는 반려견 보기" ng-disabled="survey.$invalid"/>
-    </div>
+      {{$index}}
+      <button ng-hide="$index===(questions.length-1)" ng-disabled="!data.puppyData[question.name]" type="button" >다음 질문</button>
+      <input type="submit" role="button" ng-show="$index===(questions.length-1)" value="나에게 맞는 반려견 보기" ng-disabled="survey.$invalid"/>
+    </md-card>
   </div>
+  </md-virtual-repeat-container>
 </form>
+</md-content>

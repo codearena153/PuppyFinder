@@ -1,44 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="puppyfinder">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- 위에 3개의 태그는 반드시 head 태그의 처음에 위치해야함 -->
-        <title>PuppyFinder</title>
-        <link href="styles/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="styles/style.css" />
-        <link rel="stylesheet" type="text/css" href="lib/fullpage.js/jquery.fullPage.css" />
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    </head>
-    <body ng-controller="AppController">
-        <div class="container">
-            <div class="header">
-                <nav>
-                    <ul class="nav nav-pills pull-left">
-                        <li role="presentation" class="active"><a href="#/intro">Home</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div ng-view></div>
-        </div>
-        <footer class="footer">
-            <div class="col-md-12">
-                <span class="info">By PuppyFinder Team</span>
-            </div>
-        </footer>
 
-        <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
-        <script type="text/javascript" src="lib/fullpage.js/jquery.fullPage.js"></script>
-        <script src="styles/bootstrap.min.js"></script>
-        <script src="lib/angular/angular.js"></script>
-        <script src="lib/angular-route/angular-route.js"></script>
-        <script src="lib/angular-base64/angular-base64.js"></script>
-        <script src="app/intro/intro.js"></script>
-        <script src="app/survey/survey.js"></script>
-        <script src="app/result/result.js"></script>
-        <script src="app/app.js"></script>
-    </body>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 위에 3개의 태그는 반드시 head 태그의 처음에 위치해야함 -->
+    <title>PuppyFinder</title>
+    <!-- <link href="styles/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="lib/normalize-css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="lib/angular-material/angular-material.css" />
+    <link rel="stylesheet" type="text/css" href="styles/SpoqaHanSans.css" />
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+
+    <!-- <link rel="stylesheet" type="text/css" href="lib/fullpage.js/jquery.fullPage.css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+</head>
+
+<body ng-controller="AppController">
+    <header>
+        <ul class="nav nav-pills pull-left">
+            <li role="presentation" class="active"><a href="#/intro">puppy finder</a></li>
+        </ul>
+    </header>
+    <div ng-view></div>
+    <footer class="footer">
+        <div class="col-md-12">
+            <span class="info">By PuppyFinder Team</span>
+        </div>
+    </footer>
+
+    <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+    <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+    <!-- <script type="text/javascript" src="lib/fullpage.js/jquery.fullPage.js"></script> -->
+    <!-- <script src="styles/bootstrap.min.js"></script> -->
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-route/angular-route.js"></script>
+    <script src="lib/angular-aria/angular-aria.js"></script>
+    <script src="lib/angular-animate/angular-animate.js"></script>
+    <script src="lib/angular-material/angular-material.js"></script>
+    <!-- <script src="lib/angular-base64/angular-base64.js"></script> -->
+    <script src="app/intro/intro.js"></script>
+    <script src="app/survey/survey.js"></script>
+    <script src="app/result/result.js"></script>
+    <script src="app/app.js"></script>
+</body>
+
 </html>

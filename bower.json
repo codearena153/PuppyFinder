@@ -20,6 +20,7 @@
     "bootstrap": "^3.3.6",
     "fullpage.js": "^2.8.0",
     "ng-twitter-api": "^0.1.5",
-    "angular-base64": "^2.0.5"
+    "angular-base64": "^2.0.5",
+    "angular-material": "^1.0.9"
   }
 }
