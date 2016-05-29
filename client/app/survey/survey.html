@@ -1,4 +1,4 @@
-<form ng-submit="sendQuery()">
+<form name="survey" ng-submit="sendQuery()">
   <p>
     {{data.puppyData}}
   </p>
@@ -7,14 +7,14 @@
       <h5>{{question.subject}}</h5>
       <h1>{{question.title}}</h1>
       <p>{{question.content}}</p>
-      <fieldset id="{{question.name}}" ng-form='{{question.name}}'>
+      <fieldset id="{{question.name}}" ng-form="{{question.name}}">
         <label ng-repeat="option in question.options">
           <input ng-model="data.puppyData[question.name]" type="radio" name="{{question.name}}" value="{{option.value}}" ng-required="true">
           <span>{{option.text}}</span> <br />
         </label>
       </fieldset>
+      <button class="btn btn-lg btn-success btn-result" role="button" data-ng-show="$first || $middle" ng-disabled="!data.puppyData[question.name]" type="button" >다음 질문</button>
+      <input type="submit" class="btn btn-lg btn-success btn-result" role="button" data-ng-show="$last" value="나에게 맞는 반려견 보기" ng-disabled="survey.$invalid"/>
     </div>
-    <a class="btn btn-lg btn-success btn-result" href="#/survey" role="button" data-ng-show="$first || $middle">다음 질문</a>
-    <input type="submit" class="btn btn-lg btn-success btn-result" role="button" data-ng-show="$last" value="나에게 맞는 반려견 보기"/>
   </div>
 </form>
