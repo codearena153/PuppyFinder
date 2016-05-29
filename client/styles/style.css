@@ -101,3 +101,6 @@ body {
     margin-right: auto;
 }
 
+.nav .dog {
+  display: inline-block;
+}

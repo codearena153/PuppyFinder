@@ -18,6 +18,8 @@
     "angular": "1.5.5",
     "angular-route": "~1.5.5",
     "bootstrap": "^3.3.6",
-    "fullpage.js": "^2.8.0"
+    "fullpage.js": "^2.8.0",
+    "ng-twitter-api": "^0.1.5",
+    "angular-base64": "^2.0.5"
   }
 }
