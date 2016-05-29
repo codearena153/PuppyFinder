@@ -163,7 +163,7 @@ angular.module('puppyfinder', [
       'part=' + 'snippet' +
       '&key=' + 'AIzaSyBRXCXvGfojUxaVxBYannVo38Vzgj5W_fs' +
       '&q=' + query +' 개'+
-      '&maxResults=' + 1 +
+      '&maxResults=' + 12 +
       '&type=' + 'video' +
       '&videoEmbeddable=' + 'true'
     })

@@ -1,13 +1,28 @@
-<div id='intro' ng-app="puppyfinder.result">
+<div id="intro" ng-app="puppyfinder.result">
     <div class="result" ng-controller="ResultController" ng-init="init()">
         <h1>나에게 꼭 맞는 반려견은?</h1>
+          <ul class="nav pull-left">
+            <li class="dog" ng-repeat="dog in results">
+              <a href ng-click="setTab(dog.index)">
+              <img ng-src="{{dog.image}}" width="118" height="118"/>
+              <h6>{{dog.breed}}</h6>
+              </a>
+            </li>
+          </ul>
         <div>
-            <div class="mydog" ng-repeat="dog in results">
+            <div class="mydog" ng-repeat="dog in results" ng-show="tab === dog.index">
+              <img ng-src="{{dog.image}}" />
                 <h2>{{dog.breed}}</h2>
+                <p>{{dog.description}}</p>
+
                 <h4>관련 비디오</h4>
-                <div class="relatedVideos" ng-repeat="video in dog.relatedVideos">
-                    <!-- {{ video.id.videoId }} -->
-                    <iframe ng-src="{{ getSrc(video) }}" frameborder="0" width="640" height="400"></iframe>
+                <iframe ng-src="{{ dog.relatedVideos && getSrc(dog.currentVideo) }}" frameborder="0" width="640" height="400"></iframe>
+                <div class="relatedVideoList" ng-repeat="video in dog.relatedVideos">
+                  <a href ng-click="play(dog, video)">
+                      <img ng-src="{{video.snippet.thumbnails.default.url}}" />
+                      <h6>{{video.snippet.title}}</h6>
+                      <p>{{video.snippet.description}}</p>
+                      </a>
                 </div>
                 <div class="photos">
                   <!-- <div ng-repeat="photo in dog.relatedPhotos"> -->
