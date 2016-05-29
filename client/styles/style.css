@@ -6,9 +6,18 @@ body {
   line-height: 1.6;
 }
 
-md-card {
+md-card.question {
   width: 740px;
   height: 480px;
+}
+
+md-card.tabContent {
+  width: 740px;
+  padding: 50px;
+}
+
+div.mydog {
+  width: 640px;
 }
 
 header, footer {
