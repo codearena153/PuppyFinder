@@ -67,7 +67,7 @@ app.get('/puppies', function(req, res) {
 });
 
 app.get('/puppies/:breed', function(req, res) {
-  console.log('getting ' + breed);
+  console.log('getting ' + req.params.breed);
   var breed = req.params.breed;
 
   Puppy.findOne({breed: breed})
@@ -104,35 +104,188 @@ app.delete('/puppies/:breed', function(req, res) {
 
 app.put('/puppies/:id', function(req, res) {
 
-  console.log('in put', req.params.id);
+  console.log('in put, id is: ', req.params.id);
 
   //var puppy = new Puppy();
-
-  console.log('---- id is ----- ', req.params.id);
-  //console.log('request body >>>>', req.body);
 
   Puppy.findById(req.params.id, function(err, puppy) {
     if (err) {
       console.log("Can't update", id);
       return;
     }
-    console.log('request body >>>>', req.body);
-    var total_weight = 0;
-    console.log('results of findById -----', puppy);
 
+    var ppy = new Puppy();
+
+    var total_weight = 0;
+
+    console.log('2222222request body >>>>', req.body);
+    console.log('2222222results of findById -----', puppy);
+
+    puppy.breed = req.body.breed;
+    puppy.description = req.body.description;
+    puppy.image = req.body.image;
+    puppy.isUserAllergic.allergic = req.body.isUserAllergic.allergic;
+    puppy.isUserAbsent.absent = req.body.isUserAbsent.absent;
+    puppy.isUserActive.active = req.body.isUserActive.active;
+    puppy.isUserSingle.single = req.body.isUserSingle.single;
+    puppy.isPuppyFriendly.friendly = req.body.isPuppyFriendly.friendly;
+    puppy.isPuppyInside.inside = req.body.isPuppyInside.inside;
+    puppy.initialCost.cost = req.body.initialCost.cost;
+    puppy.maintenance.cost = req.body.maintenance.cost;
+
+    // set weight based on changed value and calculate total weigh
+
+
+    switch (puppy.isUserAllergic.allergic) {
+      case 'false':
+        puppy.isUserAllergic.weight = 0;
+        total_weight += 0;
+        break;
+      case 'true':
+        puppy.isUserAllergic.weight = 1;    
+        total_weight += 1;
+        break;
+    }
+
+    switch (puppy.isUserAbsent.absent) {
+      case 'false':
+        puppy.isUserAbsent.weight = 0;
+        total_weight += 0;
+        break;
+      case 'true':
+        puppy.isUserAbsent.weight = 1;
+        total_weight += 1;
+        break;
+    }
+
+    switch (puppy.isUserActive.active) {
+      case 'false':
+        puppy.isUserActive.weight = 0;
+        total_weight += 0;
+        break;
+      case 'true':
+        puppy.isUserActive.weight = 1;
+        total_weight += 1;
+        break;
+    }
+
+    switch (puppy.isUserSingle.single) {
+      case 'false':
+        puppy.isUserSingle.weight = 0;
+        total_weight += 0;
+        break;
+      case 'true':
+        puppy.isUserSingle.weight = 1;
+        total_weight += 1;
+        break;
+    }
+
+    switch (puppy.isPuppyFriendly.friendly) {
+      case 'false':
+        puppy.isPuppyFriendly.weight = 0;
+        total_weight += 0;
+        break;
+      case 'true':
+        puppy.isPuppyFriendly.weight = 1;
+        total_weight += 1;
+        break;
+      case 'default':
+        puppy.isPuppyFriendly.weight = 2;
+        total_weight += 2;
+    }
+
+    switch (puppy.isPuppyFriendly.inside) {
+      case 'false':
+        puppy.isPuppyFriendly.weight = 0;
+        total_weight += 0;
+        break;
+      case 'true':
+        puppy.isPuppyFriendly.weight = 1;
+        total_weight += 1;
+        break;
+      case 'default':
+        puppy.isPuppyFriendly.weight = 2;
+        total_weight += 2;
+    }
+
+    switch (puppy.initialCost.cost) {
+      case 10:
+        puppy.initialCost.weight = 1;
+        total_weight += 1;
+        break;
+      case 20:
+        puppy.initialCost.weight = 2;
+        total_weight += 2;
+        break;
+      case 30:
+        puppy.initialCost.weight = 3;
+        total_weight += 3;
+        break;
+      case 50:
+        puppy.initialCost.weight = 5;
+        total_weight += 5;
+        break;
+      case 100:
+        puppy.initialCost.weight = 10;
+        total_weight += 10;
+        break;
+      case 150:
+        puppy.initialCost.weight = 15;
+        total_weight += 15;
+        break;
+    }
+
+    switch (puppy.maintenance.cost) {
+      case 5:
+        puppy.maintenance.weight = 1;
+        total_weight += 1;
+        break;
+      case 10:
+        puppy.maintenance.weight = 2;
+        total_weight += 2;
+        break;
+      case 15:
+        puppy.maintenance.weight = 3;
+        total_weight += 3;
+        break;
+      case 20:
+        puppy.maintenance.weight = 4;
+        total_weight += 4;
+        break;
+      case 25:
+        puppy.initialCost.weight = 5;
+        total_weight += 5;
+        break;
+      case 30:
+        puppy.initialCost.weight = 6;
+        total_weight += 6;
+        break;
+    }
+ 
+    console.log("total_weight is", total_weight);
     puppy.total_weight = total_weight;
-    //console.log('updated puppy >>>>>>>>>', puppy);
-    /*
-    puppy.save(function(err) {
+
+    puppy.save(function(err, puppy) {
       if (err) {
-        console.log("Can't save", id);
+        console.log("Can't save", puppy);
       } else {
         console.log('updated puppy >>>>>>>>>', puppy);
-        res.send(puppy);
+        //res.send(puppy);
+          Puppy.find().sort({ total_weight: -1 })
+          .exec(function(err, ppy) {
+            if (err) res.send('cannot retrieve data from DB');
+            else {
+              //console.log(ppy);
+              res.send(ppy);
+            }
+          });
       }
     })
-    */
+
+
   });
+
+
 });
 
 app.post('/search', function(req, res) {
@@ -159,21 +312,23 @@ app.post('/search', function(req, res) {
 app.post('/result', function(req, res) {
     var puppy = new Puppy();
 
+    console.log('>>>>>>>> in result >>>>>>', req.body);
+
     // create a new db document
     puppy.breed = req.body.breed;
     puppy.description = req.body.description;
     puppy.image = req.body.image;
-    puppy.isUserAllergic.allergic = req.body.allergic;
-    puppy.isUserAbsent.absent = req.body.absent;
-    puppy.isUserActive.active = req.body.active;
-    puppy.isUserSingle.single = req.body.single;
-    puppy.isPuppyFriendly.friendly = req.body.friendly;
-    puppy.isPuppyInside.inside = req.body.inside;
-    puppy.initialCost.cost = req.body.initialCost;
-    puppy.maintenance.cost = req.body.maintenance;
+    puppy.isUserAllergic.allergic = req.body.isUserAllergic.allergic;
+    puppy.isUserAbsent.absent = req.body.isUserAbsent.absent;
+    puppy.isUserActive.active = req.body.isUserActive.active;
+    puppy.isUserSingle.single = req.body.isUserSingle.single;
+    puppy.isPuppyFriendly.friendly = req.body.isPuppyFriendly.friendly;
+    puppy.isPuppyInside.inside = req.body.isPuppyInside.inside;
+    puppy.initialCost.cost = req.body.initialCost.cost;
+    puppy.maintenance.cost = req.body.maintenance.cost;
     puppy.total_weight = addWeight(puppy);
 
-    console.log("created puppy: ", puppy);
+    //console.log("created puppy: ", puppy);
 
     puppy.save(function(err, puppy) {
       if (err)  res.send("error saving new puppy");

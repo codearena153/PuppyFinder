@@ -23,11 +23,10 @@
 <body ng-app="UpdateApp">
   
   <div class="container" ng-controller="UpdateController">
-    <h1>관리자 페이지(갱신)</h1>
+    <h1 style="text-align: center">관리자 페이지(갱신)</h1>
 
     견종: 
     <input type="text" name="breed" maxlength="20" required value="{{puppy.breed}}" ng-model="puppy.breed"><br><br>
-    크기: 
 
     설명: <textarea name="description" rows=10 cols=80 required maxlength="512" ng-model="puppy.description">{{puppy.description}}</textarea><br><br>
 
