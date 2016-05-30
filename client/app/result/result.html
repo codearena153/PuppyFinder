@@ -1,17 +1,18 @@
 <md-content layout="column" layout-align="center center">
   <div class="result" ng-controller="ResultController" ng-init="init()">
     <h1>나에게 꼭 맞는 반려견은?</h1>
-    <!-- Tab navigation -->
-    <ul class="nav pull-left">
-      <li class="dog" ng-repeat="dog in results">
-        <a href ng-click="setTab($index)">
-          <img ng-src="{{dog.image}}" width="118" height="118" />
-          <h6>{{dog.breed}}</h6>
-        </a>
-      </li>
-    </ul>
-    <!-- Tab Contents -->
+
     <md-card class="tabContent">
+      <!-- Tab navigation -->
+      <ul layout="row" >
+        <li class="dog" ng-repeat="dog in results" flex>
+          <a href ng-click="setTab($index)">
+            <img ng-src="{{dog.image}}" />
+            <h6>{{dog.breed}}</h6>
+          </a>
+        </li>
+      </ul>
+      <!-- Tab Contents -->
       <div class="mydog" ng-repeat="dog in results" ng-show="tab === $index">
         <img ng-src="{{dog.image}}" />
         <h2>{{dog.breed}}</h2>
@@ -20,15 +21,20 @@
         <!-- Related Video Player -->
         <iframe ng-src="{{ dog.relatedVideos && getSrc(dog.currentVideo) }}" frameborder="0" width="640" height="400"></iframe>
         <!-- Related Video List -->
-        <div class="relatedVideoList" ng-repeat="video in dog.relatedVideos">
-          <a href ng-click="play(dog, video)">
-            <img ng-src="{{video.snippet.thumbnails.default.url}}" />
-            <h6>{{video.snippet.title}}</h6>
-            <p>{{video.snippet.description}}</p>
+        <md-virtual-repeat-container layout="column" ng-style="{'height': '300px'}" md-auto-shrink="true">
+        <div class="relatedVideoList" md-virtual-repeat="video in dog.relatedVideos">
+          <a href ng-click="play(dog, video)" layout="row">
+            <img ng-src="{{video.snippet.thumbnails.default.url}}" flex="15"/>
+            <div layout="column" flex="85">
+              <h6>{{video.snippet.title}}</h6>
+              <!-- <p>{{video.snippet.description}}</p> -->
+            </div>
           </a>
         </div>
+      </md-virtual-repeat-container>
         <!-- Related Photo List -->
-        <div class="photos" layout="">
+        <div class="photos" layout="column">
+        <h4>관련 이미지</h4>
           <md-grid-list md-cols="5" md-row-height="5:4" md-gutter="10px" flex>
             <md-grid-tile md-rowspan="1" md-colspan="1" ng-repeat="photo in dog.relatedPhotos">
               <img ng-src="{{photo.thumbnail}}" />
