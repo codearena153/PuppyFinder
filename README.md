@@ -1,22 +1,40 @@
 ## Synopsis
 
 At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
+반려견을 처음으로 입양하려는 사람들을 위한 견종 추천 서비스
+Matching service for new-comers
 
 ## Motivation
 
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
+처음 반려견을 입양하려는 사람들은 수없이 많은 견종 중에서 자신에게 적합한 종을 선택하기가 어렵습니다. Puppy Finder는 그러한 잘못된 선택으로 인한 유기견의 증가 등 사회적 문제를 경감하는데 도움이 될 수 있습니다. 저희는 처음 반려견을 입양할 때 간과하기 쉬운 평균적인 양육비용 등의 항목들에 대해 축적된 데이터베이스를 활용하여 최적의 제안을 하고자 합니다.
 
 ## Installation
 
-Provide code examples and explanations of how to get the project.
+Make sure to 
+```
+bower install
+npm install
+```
 
-## Core Functions
+## Basic Structure
 
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
-
+* client/
+  * app/
+  * assets/
+  * lib/
+  * styles/
+  * index.html
+  
+* server/
+  * admin/ : Fuctionalities for admin use (e.g. upload, delete, update puppy data)
+  * config/: Helper functions 
+    * init.js: initialize puppies DB 
+    * helpers.js: calculateTotalWeight, setWeight, sortArray
+  * db/ :  puppy DB schema
+  * server.js : Middleware setup, CRUD functionality using RESTful API
+  
 ## Tests
-
-Describe and show how to run the tests with code examples.
+TBD
 
 ## Contributors
 
