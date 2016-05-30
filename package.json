@@ -1,7 +1,7 @@
 {
   "name": "puppyfinder",
   "version": "1.0.0",
-  "description": "",
+  "description": "Puppy Matching Service for Newcomers",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
