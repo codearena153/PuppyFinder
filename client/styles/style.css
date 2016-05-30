@@ -6,6 +6,11 @@ body {
   line-height: 1.6;
 }
 
+.intro {
+  background-image: url("../assets/bg-image.png");
+  background-size: cover;
+}
+
 md-card.question {
   width: 740px;
   height: 480px;
@@ -23,4 +28,9 @@ div.mydog {
 header, footer {
   position: fixed;
   z-index: 10;
+}
+
+.md-virtual-repeat-offsetter {
+transition: transfrom 2s ease-in-out;
+
 }
