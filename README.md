@@ -26,7 +26,7 @@ at the ROOT directory
 * client/
   * app/
   * assets/
-  * lib/
+  * lib/dwqcwefwerg
   * styles/
   * index.html
   
