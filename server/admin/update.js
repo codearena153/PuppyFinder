@@ -1,7 +1,7 @@
 var app = angular.module("UpdateApp", []);
 
 app.controller("UpdateController", function($scope, $http) {
-  
+
   $scope.allergic = [['true', '많음'], ['false', '적음']];
   $scope.absent = [['true', '가능'], ['false', '불가능']];
   $scope.active = [['true', '활동적'], ['false', '보통']];
@@ -18,7 +18,7 @@ app.controller("UpdateController", function($scope, $http) {
 
   $scope.select = function(breed) {
     console.log('in select, breed is ', breed);
-    $http.get("/puppies/" + breed) 
+    $http.get("/puppies/" + breed)
       .success(function(response) {
         console.log('selected item is ', response);
         $scope.puppy = response;
@@ -27,11 +27,11 @@ app.controller("UpdateController", function($scope, $http) {
 
   $scope.update = function(puppy) {
     console.log("in update: ", puppy._id);
-    $http.put("/puppies/" + puppy._id, puppy) 
+    $http.put("/puppies/" + puppy._id, puppy)
       .success(function(response) {
         console.log("changed info is ", response);
         $scope.puppies = response;
-      });  
+      });
   };
 
 
