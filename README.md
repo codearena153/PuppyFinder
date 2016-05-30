@@ -21,6 +21,8 @@ npm install
 ```
 at the ROOT directory
 
+* When bower install, make sure to select 3) (the latest version)
+
 ## Basic Structure
 
 * client/ 
