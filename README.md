@@ -4,7 +4,7 @@
 
 반려견을 처음으로 입양하려는 사람들을 위한 견종 추천 서비스
 
-Puppy Match Making Service for Newcomers 
+Puppy Matching Service for Newcomers 
 
 ## Motivation
 
