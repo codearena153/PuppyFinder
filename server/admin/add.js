@@ -12,22 +12,18 @@ app.controller("AddController", function($scope, $http, $window) {
   $scope.tableShow = false;
 
   $scope.add = function(puppy) {
-    console.log("in add");
-    
     $scope.inputShow = !$scope.inputShow;
     $scope.tableShow = !$scope.tableShow;
 
-    $http.post("/result", puppy) 
+    $http.post("/result", puppy)
       .success(function(response) {
         console.log("Just added: ", response);
         $scope.puppy = response;
-        //$scope.puppy = response;
-      });  
-  }; 
+      });
+  };
 
   $scope.goback = function() {
     console.log("in goback function");
-    $window.location.href = '/admin'
-  }; 
-
-})
+    $window.location.href = '/admin';
+  };
+});

@@ -11,28 +11,23 @@ app.controller("UpdateController", function($scope, $http) {
 
   $http.get("/puppies")
     .success(function(response) {
-      console.log("response is ", response);
       $scope.puppies = response;
     });
 
 
   $scope.select = function(breed) {
-    console.log('in select, breed is ', breed);
     $http.get("/puppies/" + breed)
       .success(function(response) {
-        console.log('selected item is ', response);
+        console.log('Selected puppy: ', response);
         $scope.puppy = response;
-      })
-  };
-
-  $scope.update = function(puppy) {
-    console.log("in update: ", puppy._id);
-    $http.put("/puppies/" + puppy._id, puppy)
-      .success(function(response) {
-        console.log("changed info is ", response);
-        $scope.puppies = response;
       });
   };
 
-
-})
+  $scope.update = function(puppy) {
+    $http.put("/puppies/" + puppy._id, puppy)
+      .success(function(response) {
+        console.log("Updated puppy: ", response);
+        $scope.puppies = response;
+      });
+  };
+});

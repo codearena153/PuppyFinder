@@ -1,3 +1,4 @@
+/* Configures individual table field's weight */
 var weightTbl = {
   ALLERGIC: {
     nope: 0,
@@ -25,7 +26,9 @@ var weightTbl = {
     yeap: 1,
     whatever: 2
   },
-  INIT_COST: { // weight는 최대값만 고려
+
+  // Only accepts the maximum initial cost & maintenance
+  INIT_COST: {
     IC_10: 1,
     IC_20: 2,
     IC_30: 3,
@@ -300,5 +303,5 @@ exports.sortArray = function(total_weight, array) {
     sorted[i] = arr[i][0];
   }
 
-  array = sorted;
+  return sorted;
 };
