@@ -16,19 +16,21 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
-  
+
   <script src="update.js"></script>
 
 </head>
 <body ng-app="UpdateApp">
-  
+
   <div class="container" ng-controller="UpdateController">
     <h1 style="text-align: center">관리자 페이지(갱신)</h1>
 
-    견종: 
+    견종:
     <input type="text" name="breed" maxlength="20" required value="{{puppy.breed}}" ng-model="puppy.breed"><br><br>
 
     설명: <textarea name="description" rows=10 cols=80 required maxlength="512" ng-model="puppy.description">{{puppy.description}}</textarea><br><br>
+
+    이미지: <input type="text" name="image" value="{{puppy.image}}" ng-model="puppy.image"><br><br>
 
     털빠짐 유무:
     <select ng-model="puppy.isUserAllergic.allergic">
@@ -37,19 +39,19 @@
       </option>
     </select>
 
-    집 지키미: 
+    집 지키미:
     <select ng-model="puppy.isUserAbsent.absent">
       <option ng-repeat="a in absent" value="{{a[0]}}">
         {{a[1]}}
       </option>
-    </select>    
+    </select>
 
     개 활동성:
     <select ng-model="puppy.isUserActive.active">
       <option ng-repeat="a in active" value="{{a[0]}}">
         {{a[1]}}
       </option>
-    </select>       
+    </select>
 
     개 독립성:
     <select ng-model="puppy.isUserSingle.single">
@@ -72,15 +74,15 @@
         {{i[1]}}
       </option>
     </select>
-    
+
     최대가격대(만원):
-    <input type="number" ng-model="puppy.initialCost.cost" value="{{puppy.initialCost.cost}}"> 
+    <input type="number" ng-model="puppy.initialCost.cost" value="{{puppy.initialCost.cost}}">
     <br><br>
 
     최대양육비용(만원):
     <input type="number" ng-model="puppy.maintenance.cost" value="{{puppy.maintenace.cost}}">
     <br><br>
-    
+
     <table class="table table-striped">
       <thead>
         <tr>
@@ -111,7 +113,7 @@
     </table>
 
   </div>
-  
+
 
 </body>
 </html>
