@@ -1,34 +1,34 @@
 angular.module('puppyfinder.survey', [])
 
-.controller('SurveyController', function ($scope, $window, $location, $http, QuestionList, Result) {
-    $scope.questions = QuestionList.questions;
-    $scope.data = {
-        puppyData : {}
-    };
-    
-    $scope.topIndex = 0;
-    // $scope.debug = function() {
-    //     console.log("Survey received: ", $scope.data.puppyData);
-    // };
+.controller('SurveyController', function($scope, $window, $location, QuestionList, Result) {
+  /* Get the question list from the factory and insert into this scope */
+	$scope.questions = QuestionList.questions;
 
-    // var survey = $scope.data.puppyData;
-    // console.log("updated survey data: ", survey);
+  /* Container for user's answers to survey */
+  $scope.data = {
+		puppyData: {}
+	};
 
-    $scope.sendQuery = function() {
-      Result.getResults($scope.data.puppyData)
-      .then(function(resp){
+  /* Method to send user's answers to the server and get results */
+  $scope.sendQuery = function() {
+    Result.getResults($scope.data.puppyData)
+      .then(function(resp) {
+        /* Put results in the window scope container set in the AppController  */
         $window.results = resp.data;
-        return 1;
+        return "success";
       })
-      .then(function(ok){
+      .then(function(success) {
         $location.path('/result');
       });
-    };
+  };
 
-    $scope.width = window.innerWidth;
-    $scope.height = window.innerHeight;
+  /* Default settings for styling */
+	$scope.topIndex = 0;
+  $scope.width = window.innerWidth;
+	$scope.height = window.innerHeight;
 
-    $scope.scrollTo = function(index){
-      $scope.topIndex = index;
-    };
+  /* Method to move(scroll) to the next question by changing topIndex in the scroll container */
+	$scope.scrollTo = function(index) {
+		$scope.topIndex = index;
+	};
 });

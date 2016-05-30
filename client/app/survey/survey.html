@@ -1,24 +1,30 @@
 <md-content>
+
   <form name="survey" ng-submit="sendQuery()">
+    <!-- A angular-material repeat container makes virutal scroll frame for repeated items. See https://material.angularjs.org/latest/demo/virtualRepeat -->
     <md-virtual-repeat-container layout="column" ng-style="{'height': (height)+'px'}" md-top-index="topIndex">
+      <!-- Angular-maretial repeat elements; md-item-size defines scroll height(position of topIndex) for one item -->
       <div md-virtual-repeat="question in questions" md-item-size="height">
         <div layout="column" layout-align="center center" ng-style="{'height': (height)+'px'}">
           <md-card class="question">
             <md-card-header>{{question.subject}}</md-card-header>
             <h1>{{question.title}}</h1>
             <p>{{question.content}}</p>
+            <!-- Options in a question should be grouped in a fieldset for form validation -->
             <fieldset id="{{question.name}}" ng-form="{{question.name}}">
-                <label ng-repeat="option in question.options">
-                    <input ng-model="data.puppyData[question.name]" type="radio" name="{{question.name}}" value="{{option.value}}" ng-required="true">
-                    <span>{{option.text}}</span>
-                    <br />
-                </label>
+              <label ng-repeat="option in question.options">
+                <input ng-model="data.puppyData[question.name]" type="radio" name="{{question.name}}" value="{{option.value}}" ng-required="true">
+                <span>{{option.text}}</span>
+                <br />
+              </label>
             </fieldset>
-            {{$index}}
+            <!-- Button to scroll(move) to the next question; disabled if this question is not answered -->
             <button ng-if="$index!==(questions.length-1)" ng-disabled="!data.puppyData[question.name]" type="button" ng-click="scrollTo($index+1)">다음 질문</button>
+            <!-- Submit button for the entire form; disabled if any question is not answered -->
             <input type="submit" role="button" ng-if="$index===(questions.length-1)" value="나에게 맞는 반려견 보기" ng-disabled="survey.$invalid" />
           </md-card>
         </div>
+        <!-- hr like line to divide questions -->
         <md-divider ng-if="$index!==(questions.length-1)"></md-divider>
       </div>
     </md-virtual-repeat-container>
