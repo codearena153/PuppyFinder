@@ -23,12 +23,12 @@ at the ROOT directory
 
 ## Basic Structure
 
-* client/
-  * app/
-  * assets/
-  * lib/dwqcwefwerg
-  * styles/
-  * index.html
+* client/ 
+  * app/ : Angular js and html files 
+  * assets/ : Image files for styling
+  * lib/ : javascript and css libraries such as Angular, Angular material, etc 
+  * styles/ css files
+  * index.html/ : Main view file for client
   
 * server/
   * admin/ : Fuctionalities for admin use (e.g. upload, delete, update puppy data)
