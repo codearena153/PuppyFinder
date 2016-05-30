@@ -169,7 +169,16 @@ app.get('/search', function(req, res) {
       else {
         array = puppies;
         var sorted = sortArray(puppy.total_weight, array);
-        res.send(sorted.slice(0, 3));
+        var matched = sorted.slice(0, 3);
+
+        // Increase num_selected for each matching puppy
+        for (var i = 0 ; i < 3; i++) {
+          var matchedPuppy = matched[i];
+          matchedPuppy.num_selected++;
+          matchedPuppy.save();
+        }
+
+        res.send(matched);
       }
   });
 });
