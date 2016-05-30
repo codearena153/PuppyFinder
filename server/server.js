@@ -1,51 +1,47 @@
 var express = require('express');
-// var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var url = require('url');
 var path = require('path');
 var request = require('request');
-// var rp = require('request-promise');
-
 var Puppy = require('./db/Puppy.model');
-// var db = 'mongodb://localhost/puppy';
-// var cheerio = require('cheerio');
-var calculateTotalWeight = require('./config/helpers.js').calculateTotalWeight;
-var addWeight = require('./config/helpers').addWeight;
-var sortArray = require('./config/helpers').sortArray;
-var initDB = require('./config/init');
-
-// drop collection and add insert new puppy documents into local DB
-initDB();
 
 var app = express();
 app.set('port', process.env.PORT || 8888);
 
-// Middleware loads
+/* Initialize DB */
+var initDB = require('./config/init');
+initDB();
+
+// helper functions
+var calculateTotalWeight = require('./config/helpers.js').calculateTotalWeight;
+var setWeight = require('./config/helpers').setWeight;
+var sortArray = require('./config/helpers').sortArray;
+
+// Static files load
 app.use(express.static(__dirname + '/../client'));
 app.use(express.static(__dirname + '/admin'));
 app.use(express.static(__dirname + '/db/images'));
+
+/* Handle request.body, request.params */
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// Set up routes
-
-app.get('/', function(req, res) {
-    res.type('text/plain');
-    res.send("intro loaded!");
-});
-
+/*
+ * Routing Setup
+ * Serves static files
+ */
 app.get('/admin', function(req, res) {
-    res.sendFile(__dirname + '/admin/admin.html');
+  res.sendFile(__dirname + '/admin/admin.html');
 });
 
 app.get('/upload', function(req, res) {
-    res.sendFile(__dirname + '/admin/upload.html');
+  res.sendFile(__dirname + '/admin/upload.html');
 });
 
 app.get('/update', function(req, res) {
-    res.sendFile(__dirname + '/admin/update.html');
+  res.sendFile(__dirname + '/admin/update.html');
 });
 
 app.get('/remove', function(req, res) {
@@ -56,49 +52,48 @@ app.get('/stat', function(req, res) {
     res.sendFile(__dirname + '/admin/stat.html');
 });
 
+/* Handles CRUD operations */
+/* GET all puppies in DB */
 app.get('/puppies', function(req, res) {
-  console.log('getting all puppies');
-
   Puppy.find().sort({ total_weight: -1 })
   .exec(function(err, puppy) {
-    if (err) res.send('cannot retrieve data from DB');
-    else {
-
-      //console.log(puppy);
+    if (err) {
+      res.send('cannot retrieve data from DB');
+    } else {
       res.send(puppy);
-      //console.log(puppy.breed, puppy.total_weight);
     }
   });
 });
 
+/* GET specific puppy in DB, where breed is breed */
 app.get('/puppies/:breed', function(req, res) {
-  console.log('getting ' + req.params.breed);
   var breed = req.params.breed;
 
   Puppy.findOne({breed: breed})
   .exec(function(err, puppy) {
-    if (err) res.send("can't retreive " + breed);
-    else {
-      console.log(puppy);
+    if (err) {
+      res.send("cannot retreive " + breed);
+    } else {
       res.send(puppy);
     }
   });
 });
 
-
+/* DELETE a puppy whose breed is breed */
 app.delete('/puppies/:breed', function(req, res) {
   var breed = req.params.breed;
 
-  console.log('in delete, value of breed is', breed);
+  console.log('To be deleted: ', breed);
 
   Puppy.remove({breed: breed}, function(err) {
     if (err) {
-      console.log('fail to remove' + breed);
+      console.log('fail to delete' + breed);
     } else {
       Puppy.find().sort({ total_weight: -1 })
       .exec(function(err, puppy) {
-        if (err) res.send("can't retrieve data from DB");
-        else {
+        if (err) {
+          res.send("cannot retrieve data from DB");
+        } else {
           res.send(puppy);
         }
       });
@@ -107,24 +102,13 @@ app.delete('/puppies/:breed', function(req, res) {
 });
 
 
+/* UPDATE a new puppy into puppy DB */
 app.put('/puppies/:id', function(req, res) {
-
-  console.log('in put, id is: ', req.params.id);
-
-  //var puppy = new Puppy();
-
   Puppy.findById(req.params.id, function(err, puppy) {
     if (err) {
-      console.log("Can't update", id);
-      return;
+      console.error("Cannot update ", req.params.id);
+      return null;
     }
-
-    var ppy = new Puppy();
-
-    var total_weight = 0;
-
-    console.log('2222222request body >>>>', req.body);
-    console.log('2222222results of findById -----', puppy);
 
     puppy.breed = req.body.breed;
     puppy.description = req.body.description;
@@ -137,191 +121,76 @@ app.put('/puppies/:id', function(req, res) {
     puppy.isPuppyInside.inside = req.body.isPuppyInside.inside;
     puppy.initialCost.cost = req.body.initialCost.cost;
     puppy.maintenance.cost = req.body.maintenance.cost;
-
-    // set weight based on changed value and calculate total weigh
-
-
-    switch (puppy.isUserAllergic.allergic) {
-      case 'false':
-        puppy.isUserAllergic.weight = 0;
-        total_weight += 0;
-        break;
-      case 'true':
-        puppy.isUserAllergic.weight = 1;    
-        total_weight += 1;
-        break;
-    }
-
-    switch (puppy.isUserAbsent.absent) {
-      case 'false':
-        puppy.isUserAbsent.weight = 0;
-        total_weight += 0;
-        break;
-      case 'true':
-        puppy.isUserAbsent.weight = 1;
-        total_weight += 1;
-        break;
-    }
-
-    switch (puppy.isUserActive.active) {
-      case 'false':
-        puppy.isUserActive.weight = 0;
-        total_weight += 0;
-        break;
-      case 'true':
-        puppy.isUserActive.weight = 1;
-        total_weight += 1;
-        break;
-    }
-
-    switch (puppy.isUserSingle.single) {
-      case 'false':
-        puppy.isUserSingle.weight = 0;
-        total_weight += 0;
-        break;
-      case 'true':
-        puppy.isUserSingle.weight = 1;
-        total_weight += 1;
-        break;
-    }
-
-    switch (puppy.isPuppyFriendly.friendly) {
-      case 'false':
-        puppy.isPuppyFriendly.weight = 0;
-        total_weight += 0;
-        break;
-      case 'true':
-        puppy.isPuppyFriendly.weight = 1;
-        total_weight += 1;
-        break;
-      case 'default':
-        puppy.isPuppyFriendly.weight = 2;
-        total_weight += 2;
-    }
-
-    switch (puppy.isPuppyFriendly.inside) {
-      case 'false':
-        puppy.isPuppyFriendly.weight = 0;
-        total_weight += 0;
-        break;
-      case 'true':
-        puppy.isPuppyFriendly.weight = 1;
-        total_weight += 1;
-        break;
-      case 'default':
-        puppy.isPuppyFriendly.weight = 2;
-        total_weight += 2;
-    }
-
-    switch (puppy.initialCost.cost) {
-      case 10:
-        puppy.initialCost.weight = 1;
-        total_weight += 1;
-        break;
-      case 20:
-        puppy.initialCost.weight = 2;
-        total_weight += 2;
-        break;
-      case 30:
-        puppy.initialCost.weight = 3;
-        total_weight += 3;
-        break;
-      case 50:
-        puppy.initialCost.weight = 5;
-        total_weight += 5;
-        break;
-      case 100:
-        puppy.initialCost.weight = 10;
-        total_weight += 10;
-        break;
-      case 150:
-        puppy.initialCost.weight = 15;
-        total_weight += 15;
-        break;
-    }
-
-    switch (puppy.maintenance.cost) {
-      case 5:
-        puppy.maintenance.weight = 1;
-        total_weight += 1;
-        break;
-      case 10:
-        puppy.maintenance.weight = 2;
-        total_weight += 2;
-        break;
-      case 15:
-        puppy.maintenance.weight = 3;
-        total_weight += 3;
-        break;
-      case 20:
-        puppy.maintenance.weight = 4;
-        total_weight += 4;
-        break;
-      case 25:
-        puppy.initialCost.weight = 5;
-        total_weight += 5;
-        break;
-      case 30:
-        puppy.initialCost.weight = 6;
-        total_weight += 6;
-        break;
-    }
- 
-    console.log("total_weight is", total_weight);
-    puppy.total_weight = total_weight;
+    puppy.total_weight = setWeight(puppy);
 
     puppy.save(function(err, puppy) {
       if (err) {
-        console.log("Can't save", puppy);
+        console.log("Cannot save", puppy);
       } else {
-        console.log('updated puppy >>>>>>>>>', puppy);
-        //res.send(puppy);
-          Puppy.find().sort({ total_weight: -1 })
+        console.log('Updated puppy: ', puppy);
+        Puppy.find().sort({ total_weight: -1 })
           .exec(function(err, ppy) {
-            if (err) res.send('cannot retrieve data from DB');
-            else {
-              //console.log(ppy);
+            if (err) {
+              res.send('Cannot retrieve data from DB');
+            } else {
               res.send(ppy);
             }
           });
       }
-    })
-
-
+    });
   });
-
-
 });
 
+/* SEARCH and RETURN three matching puppies */
 app.get('/search', function(req, res) {
   var url_parts = url.parse(req.url, true);
   var query = url_parts.query;
 
-    console.log("/search >>>>>>>>>>>>>>>>>>>>>>>>> Receieved req: ", query);
-    var total_weight = calculateTotalWeight(query);
+  var puppy = new Puppy();
 
-    // console.log("user data's total weight", total_weight);
+  puppy.isUserAllergic.allergic = query.allergic;
+  puppy.isUserAbsent.absent = query.absent;
+  puppy.isUserActive.active = query.active;
+  puppy.isUserSingle.single = query.single;
+  puppy.isPuppyFriendly.friendly = query.friendly;
+  puppy.isPuppyInside.inside = query.inside;
+  puppy.initialCost.cost = "" + query.initialCost;
+  puppy.maintenance.cost = "" + query.maintenance;
+  puppy.total_weight = setWeight(puppy);
 
-    var array;
+  console.log("/search >>>>>>>>>>>>>>>>>>>>>>>>> Receieved req: ", query);
+  console.log("user data's total weight: ", puppy.total_weight);
 
-    Puppy.find()
-    // .sort({ total_weight: -1 })
-    .exec(function(err, puppies) {
-        if (err) res.send('cannot retrieve data from DB');
-        else {
-          array = puppies;
-          sortArray(total_weight, array);
-          res.send(array.slice(0, 3));
+  var array;
+
+  Puppy.find()
+  .exec(function(err, puppies) {
+      if (err) res.send('cannot retrieve data from DB');
+      else {
+        array = puppies;
+        var sorted = sortArray(puppy.total_weight, array);
+        var matched = sorted.slice(0, 3);
+
+        // Increase num_selected for each matching puppy
+        for (var i = 0 ; i < 3; i++) {
+          var matchedPuppy = matched[i];
+          matchedPuppy.num_selected++;
+          matchedPuppy.save();
         }
-    });
+
+        res.send(matched);
+      }
+  });
 });
 
+/*
+ * SHOWS the result after admin user INSERTS puppy data via admin page
+ * The reason POST is used is that we want to hide parameters at the end of url
+ */
 app.post('/result', function(req, res) {
     var puppy = new Puppy();
 
-    console.log('>>>>>>>> in result >>>>>>', req.body);
-
-    // create a new db document
+    // Create a new db document
     puppy.breed = req.body.breed;
     puppy.description = req.body.description;
     puppy.image = req.body.image;
@@ -333,14 +202,11 @@ app.post('/result', function(req, res) {
     puppy.isPuppyInside.inside = req.body.isPuppyInside.inside;
     puppy.initialCost.cost = req.body.initialCost.cost;
     puppy.maintenance.cost = req.body.maintenance.cost;
-    puppy.total_weight = addWeight(puppy);
-
-    //console.log("created puppy: ", puppy);
+    puppy.total_weight = setWeight(puppy);
 
     puppy.save(function(err, puppy) {
       if (err)  res.send("error saving new puppy");
       else {
-        console.log(puppy);
         res.send(puppy);
       }
     });
@@ -349,17 +215,17 @@ app.post('/result', function(req, res) {
 app.get('/daum', function(req, res){
   var url_parts = url.parse(req.url, true);
   var query = url_parts.query;
-  console.log(query);
+  // console.log(query);
   request({
     method: 'GET',
     url: encodeURI('https://apis.daum.net/search/image?apikey=0a82237676f6eb236ee760a0912ec05f&q='+query.q+'&result=20&output=json')
     // url: encodeURI('https://www.googleapis.com/customsearch/v1?q='+query.q +'&cx=007711437540587242288%3A1tx-m0h4ejq&imgType=photo&searchType=image&key=AIzaSyAIrtttKYKEIsLA1sdftk50R3xj3a5krvM')
   }, function(error, response, body){
     if(error){
-      console.log(error);
+      // console.log(error);
       res.send(404);
     } else {
-    console.log('BODY', body);
+    // console.log('BODY', body);
     res.send(body);
   }
   });

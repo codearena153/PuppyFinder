@@ -28,7 +28,7 @@
     <h1 style="text-align: center">관리자 페이지(추가)</h1>
 
     <div class="add-field" ng-show="inputShow">
-      견종: 
+      견종:
       <input type="text" name="breed" maxlength="20" required value="{{puppy.breed}}" ng-model="puppy.breed"><br><br>
 
       설명: <textarea name="description" rows=10 cols=80 required maxlength="512" ng-model="puppy.description">{{puppy.description}}</textarea><br><br>
@@ -42,19 +42,19 @@
         </option>
       </select>
 
-      집 지키미: 
+      집 지키미:
       <select ng-model="puppy.isUserAbsent.absent" ng-init="puppy.isUserAbsent.absent='true'" >
         <option ng-repeat="a in absent" value="{{a[0]}}">
           {{a[1]}}
         </option>
-      </select>    
+      </select>
 
       개 활동성:
       <select ng-model="puppy.isUserActive.active" ng-init="puppy.isUserActive.active='true'">
         <option ng-repeat="a in active" value="{{a[0]}}">
           {{a[1]}}
         </option>
-      </select>       
+      </select>
 
       개 독립성:
       <select ng-model="puppy.isUserSingle.single" ng-init="puppy.isUserSingle.single='true'">
@@ -77,9 +77,9 @@
           {{i[1]}}
         </option>
       </select>
-      
+
       최대가격대(만원):
-      <input type="number" ng-min="10" ng-max="150" ng-maxlength="3" ng-model="puppy.initialCost.cost" value="{{puppy.initialCost.cost}}"> 
+      <input type="number" ng-min="10" ng-max="150" ng-maxlength="3" ng-model="puppy.initialCost.cost" value="{{puppy.initialCost.cost}}">
       <br><br>
 
       최대양육비용(만원):
@@ -90,91 +90,30 @@
         추가</span>
       </button>
     </div>
-  
+
     <div class="show-table" ng-show="tableShow">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>
-            견종: {{puppy.breed}}이 추가되었습니다.
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{puppy.description}}</td>
-        </tr>
-        <tr>
-          <td>
-            <button ng-click="goback()" class="btn btn-success btn-lg">
-              OK
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>
+              견종: {{puppy.breed}}이 추가되었습니다.
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{puppy.description}}</td>
+          </tr>
+          <tr>
+            <td>
+              <button ng-click="goback()" class="btn btn-success btn-lg">
+                OK
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
   </div>
-
-
-
-
-<!--
-  <h1>Puppy 추가</h1>
-
-  <form method="post" action="/result">
-    견종:
-    <input type="text" name="breed" maxlength="20" required><br><br>
-    설명: <textarea name="description" rows=10 cols=80 required maxlength="512"></textarea><br><br>
-    이미지: <input type="text"><br><br>
-    털빠짐 유무:
-    <select name="allergic">
-      <option value="true" selected>많음</option>
-      <option value="false">적음</option>
-    </select>
-    집 지키미:
-    <select name="absent">
-      <option value="true" selected>가능</option>
-      <option value="false">불가능</option>
-    </select>
-    개 활동성:
-    <select name="active">
-      <option value="true" selected>활동적</option>
-      <option value="false">보통</option>
-    </select>
-    개 독립성:
-    <select name="single">
-      <option value="true" selected>혼자 잘 지냄</option>
-      <option value="false">외로움을 잘탐 </option>
-    </select>
-    개 친화력:
-    <select name="friendly">
-      <option value="true" selected>강함</option>
-      <option value="false">약함</option>
-      <option value="default">보통</option>
-    </select>
-    개 사육장소:
-    <select name="inside">
-      <option value="true" selected>실내</option>
-      <option value="false">실외</option>
-      <option value="default">상관없음</option>
-    </select>
-     <br><br>
-    최대가격대 (만원) [10, 20, 30, 50, 100, 150]:
-    <input type="number" name="initialCost" min="10" max="150"><br><br>
-
-    최대 양육비용 (만원) [5 10 15 20 25 30]:
-    <input type="number" name="maintenance" min="5" max="50">
-    <br><br>
-
-
-
-    <br><br>
-
-    <input type="submit" value="add">
-  </form>
--->
-
 </body>
 </html>

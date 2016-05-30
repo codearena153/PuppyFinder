@@ -1,8 +1,10 @@
 var mongoose = require('mongoose');
 var db = 'mongodb://localhost/puppy';
 var Puppy = require('../db/Puppy.model');
-var addWeight = require('./helpers').addWeight;
+var setWeight = require('./helpers').setWeight;
 
+
+/* Drop collection and add insert new puppy documents into local DB */
 module.exports = function(){
 
     // Connects mongo DB
@@ -27,11 +29,12 @@ module.exports = function(){
     puppy.isPuppyInside.inside = "true";
     puppy.initialCost.cost = "50";
     puppy.maintenance.cost = "10";
-    puppy.total_weight = addWeight(puppy);
+    puppy.total_weight = setWeight(puppy);
 
     puppy.save(function(err, puppy) {
-      if (err) console.error("error saving new puppy");
-      else {
+      if (err) {
+        console.error("error saving new puppy");
+      } else {
         console.log("puppy created: ", puppy);
       }
     });
@@ -50,11 +53,12 @@ module.exports = function(){
     puppy.isPuppyInside.inside = "true";
     puppy.initialCost.cost = "150";
     puppy.maintenance.cost = "20";
-    puppy.total_weight = addWeight(puppy);
+    puppy.total_weight = setWeight(puppy);
 
     puppy.save(function(err, puppy) {
-      if (err) console.error("error saving new puppy");
-      else {
+      if (err) {
+        console.error("error saving new puppy");
+      } else {
         console.log("puppy created: ", puppy);
       }
     });
@@ -73,11 +77,12 @@ module.exports = function(){
     puppy.isPuppyInside.inside = "true";
     puppy.initialCost.cost = "30";
     puppy.maintenance.cost = "25";
-    puppy.total_weight = addWeight(puppy);
+    puppy.total_weight = setWeight(puppy);
 
     puppy.save(function(err, puppy) {
-      if (err) console.error("error saving new puppy");
-      else {
+      if (err) {
+        console.error("error saving new puppy");
+      } else {
         console.log("puppy created: ", puppy);
       }
     });
@@ -96,11 +101,12 @@ module.exports = function(){
     puppy.isPuppyInside.inside = "true";
     puppy.initialCost.cost = "20";
     puppy.maintenance.cost = "20";
-    puppy.total_weight = addWeight(puppy);
+    puppy.total_weight = setWeight(puppy);
 
     puppy.save(function(err, puppy) {
-      if (err) console.error("error saving new puppy");
-      else {
+      if (err) {
+        console.error("error saving new puppy");
+      } else {
         console.log("puppy created: ", puppy);
       }
     });
@@ -119,11 +125,12 @@ module.exports = function(){
     puppy.isPuppyInside.inside = "false";
     puppy.initialCost.cost = "100";
     puppy.maintenance.cost = "15";
-    puppy.total_weight = addWeight(puppy);
+    puppy.total_weight = setWeight(puppy);
 
     puppy.save(function(err, puppy) {
-      if (err) console.error("error saving new puppy");
-      else {
+      if (err) {
+        console.error("error saving new puppy");
+      } else {
         console.log("puppy created: ", puppy);
       }
     });
@@ -142,11 +149,12 @@ module.exports = function(){
     puppy.isPuppyInside.inside = "false";
     puppy.initialCost.cost = "30";
     puppy.maintenance.cost = "10";
-    puppy.total_weight = addWeight(puppy);
+    puppy.total_weight = setWeight(puppy);
 
     puppy.save(function(err, puppy) {
-      if (err) console.error("error saving new puppy");
-      else {
+      if (err) {
+        console.error("error saving new puppy");
+      } else {
         console.log("puppy created: ", puppy);
       }
     });
@@ -165,16 +173,13 @@ module.exports = function(){
     puppy.isPuppyInside.inside = "false";
     puppy.initialCost.cost = "150";
     puppy.maintenance.cost = "15";
-    puppy.total_weight = addWeight(puppy);
+    puppy.total_weight = setWeight(puppy);
 
     puppy.save(function(err, puppy) {
-      if (err) console.error("error saving new puppy");
-      else {
+      if (err) {
+        console.error("error saving new puppy");
+      } else {
         console.log("puppy created: ", puppy);
       }
     });
-
-    // puppy 08
-
-
 };
