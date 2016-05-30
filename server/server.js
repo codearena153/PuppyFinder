@@ -142,21 +142,35 @@ app.put('/puppies/:id', function(req, res) {
 });
 
 /* SEARCH and RETURN three matching puppies */
-app.post('/search', function(req, res) {
-  var total_weight = calculateTotalWeight(req.body);
+app.get('/search', function(req, res) {
+  var url_parts = url.parse(req.url, true);
+  var query = url_parts.query;
+
+  var puppy = new Puppy();
+
+  puppy.isUserAllergic.allergic = query.allergic;
+  puppy.isUserAbsent.absent = query.absent;
+  puppy.isUserActive.active = query.active;
+  puppy.isUserSingle.single = query.single;
+  puppy.isPuppyFriendly.friendly = query.friendly;
+  puppy.isPuppyInside.inside = query.inside;
+  puppy.initialCost.cost = "" + query.initialCost;
+  puppy.maintenance.cost = "" + query.maintenance;
+  puppy.total_weight = setWeight(puppy);
+
+  console.log("/search >>>>>>>>>>>>>>>>>>>>>>>>> Receieved req: ", query);
+  console.log("user data's total weight: ", puppy.total_weight);
+
   var array;
 
   Puppy.find()
   .exec(function(err, puppies) {
-    if (err) {
-      res.send('cannot retrieve data from DB');
-    } else {
-      array = puppies;
-      sortArray(total_weight, array);
-
-      // Shows 3 matching puppies
-      res.send(array.slice(0, 3));
-    }
+      if (err) res.send('cannot retrieve data from DB');
+      else {
+        array = puppies;
+        var sorted = sortArray(puppy.total_weight, array);
+        res.send(sorted.slice(0, 3));
+      }
   });
 });
 
@@ -167,23 +181,23 @@ app.post('/search', function(req, res) {
 app.post('/result', function(req, res) {
     var puppy = new Puppy();
 
+    // Create a new db document
     puppy.breed = req.body.breed;
     puppy.description = req.body.description;
     puppy.image = req.body.image;
-    puppy.isUserAllergic.allergic = req.body.allergic;
-    puppy.isUserAbsent.absent = req.body.absent;
-    puppy.isUserActive.active = req.body.active;
-    puppy.isUserSingle.single = req.body.single;
-    puppy.isPuppyFriendly.friendly = req.body.friendly;
-    puppy.isPuppyInside.inside = req.body.inside;
-    puppy.initialCost.cost = req.body.initialCost;
-    puppy.maintenance.cost = req.body.maintenance;
+    puppy.isUserAllergic.allergic = req.body.isUserAllergic.allergic;
+    puppy.isUserAbsent.absent = req.body.isUserAbsent.absent;
+    puppy.isUserActive.active = req.body.isUserActive.active;
+    puppy.isUserSingle.single = req.body.isUserSingle.single;
+    puppy.isPuppyFriendly.friendly = req.body.isPuppyFriendly.friendly;
+    puppy.isPuppyInside.inside = req.body.isPuppyInside.inside;
+    puppy.initialCost.cost = req.body.initialCost.cost;
+    puppy.maintenance.cost = req.body.maintenance.cost;
     puppy.total_weight = setWeight(puppy);
 
     puppy.save(function(err, puppy) {
-      if (err) {
-        res.send("error saving new puppy");
-      } else {
+      if (err)  res.send("error saving new puppy");
+      else {
         res.send(puppy);
       }
     });
@@ -192,17 +206,17 @@ app.post('/result', function(req, res) {
 app.get('/daum', function(req, res){
   var url_parts = url.parse(req.url, true);
   var query = url_parts.query;
-  console.log(query);
+  // console.log(query);
   request({
     method: 'GET',
     url: encodeURI('https://apis.daum.net/search/image?apikey=0a82237676f6eb236ee760a0912ec05f&q='+query.q+'&result=20&output=json')
     // url: encodeURI('https://www.googleapis.com/customsearch/v1?q='+query.q +'&cx=007711437540587242288%3A1tx-m0h4ejq&imgType=photo&searchType=image&key=AIzaSyAIrtttKYKEIsLA1sdftk50R3xj3a5krvM')
   }, function(error, response, body){
     if(error){
-      console.log(error);
+      // console.log(error);
       res.send(404);
     } else {
-    console.log('BODY', body);
+    // console.log('BODY', body);
     res.send(body);
   }
   });
