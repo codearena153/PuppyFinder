@@ -5,7 +5,8 @@ angular.module('puppyfinder.survey', [])
     $scope.data = {
         puppyData : {}
     };
-
+    
+    $scope.topIndex = 0;
     // $scope.debug = function() {
     //     console.log("Survey received: ", $scope.data.puppyData);
     // };
@@ -22,5 +23,12 @@ angular.module('puppyfinder.survey', [])
       .then(function(ok){
         $location.path('/result');
       });
+    };
+
+    $scope.width = window.innerWidth;
+    $scope.height = window.innerHeight;
+
+    $scope.scrollTo = function(index){
+      $scope.topIndex = index;
     };
 });

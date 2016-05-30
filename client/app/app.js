@@ -3,7 +3,8 @@ angular.module('puppyfinder', [
     'puppyfinder.survey',
     'puppyfinder.result',
     'ngRoute',
-    'base64'
+    // 'base64',
+    'ngMaterial',
 ])
 .config(function ($routeProvider, $httpProvider) {
     $routeProvider
@@ -154,7 +155,7 @@ angular.module('puppyfinder', [
     });
 })
 
-.factory('RelatedContents', function($http, $base64){
+.factory('RelatedContents', function($http){
 
   var getYoutube = function(query){
     return $http({

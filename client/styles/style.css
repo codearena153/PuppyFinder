@@ -1,106 +1,26 @@
 /* Space out content a bit */
 body {
-  padding-top: 80px;
-  padding-bottom: 20px;
-  font-family : arial;
+  /*padding-top: 80px;
+  padding-bottom: 20px;*/
+  /*font-family : "Spoqa Han Sans", Apple SD Gothic Neo, Nanum Barun Gothic, Nanum Gothic, Verdana, Arial, Dotum, sans-serif;;*/
+  line-height: 1.6;
 }
 
-
-/* Everything but the puppyfinder gets side spacing for mobile first views */
-.header,
-.surveyCard,
-.footer {
-  padding-right: 15px;
-  padding-left: 15px;
+md-card.question {
+  width: 740px;
+  height: 480px;
 }
 
-/* Custom page header */
-.header {
-  padding-bottom : 20px;
-  padding-top : 20px;
-  position : fixed;
-  top : 0px;
-  left : 20px;
-  width : 100%;
-}
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  padding-bottom: 20px;
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
+md-card.tabContent {
+  width: 740px;
+  padding: 50px;
 }
 
-
-/* Customize container */
-@media (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-}
-.container-narrow > hr {
-  margin: 30px 0;
+div.mydog {
+  width: 640px;
 }
 
-/* Main surveyCard message and sign up button */
-.intro {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.intro h1, .intro p,  .intro a{
-  padding-bottom : 50px;
-}
-
-.intro .btn {
-  padding: 20px 50px;
-  font-size: 21px;
-}
-
-/* Supporting surveyCard content */
-.surveyCard {
-  margin: 40px 0;
-  height : 500px  ;
-  padding: 100px 0px;
-}
-
-.surveyCard p + h1 {
-  margin-top: 28px;
-
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
-  .header,
-  .surveyCard,
-  .footer {
-    padding-right: 0;
-    padding-left: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the intro for visual effect */
-  .intro {
-    border-bottom: 0;
-  }
-}
-
-.footer {
-    text-align: center;
-    padding: 50px 0px;
-    bottom : 20px;
-}
-
-.btn-result {
-    text-align : center;
-    display: table;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.nav .dog {
-  display: inline-block;
+header, footer {
+  position: fixed;
+  z-index: 10;
 }

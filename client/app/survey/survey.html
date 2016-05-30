@@ -1,20 +1,26 @@
-<form name="survey" ng-submit="sendQuery()">
-  <p>
-    {{data.puppyData}}
-  </p>
-  <div class="row surveyCard " ng-repeat="question in questions">
-    <div class="col-lg-12 table">
-      <h5>{{question.subject}}</h5>
-      <h1>{{question.title}}</h1>
-      <p>{{question.content}}</p>
-      <fieldset id="{{question.name}}" ng-form="{{question.name}}">
-        <label ng-repeat="option in question.options">
-          <input ng-model="data.puppyData[question.name]" type="radio" name="{{question.name}}" value="{{option.value}}" ng-required="true">
-          <span>{{option.text}}</span> <br />
-        </label>
-      </fieldset>
-      <button class="btn btn-lg btn-success btn-result" role="button" data-ng-show="$first || $middle" ng-disabled="!data.puppyData[question.name]" type="button" >다음 질문</button>
-      <input type="submit" class="btn btn-lg btn-success btn-result" role="button" data-ng-show="$last" value="나에게 맞는 반려견 보기" ng-disabled="survey.$invalid"/>
-    </div>
-  </div>
-</form>
+<md-content>
+  <form name="survey" ng-submit="sendQuery()">
+    <md-virtual-repeat-container layout="column" ng-style="{'height': (height)+'px'}" md-top-index="topIndex">
+      <div md-virtual-repeat="question in questions" md-item-size="height">
+        <div layout="column" layout-align="center center" ng-style="{'height': (height)+'px'}">
+          <md-card class="question">
+            <md-card-header>{{question.subject}}</md-card-header>
+            <h1>{{question.title}}</h1>
+            <p>{{question.content}}</p>
+            <fieldset id="{{question.name}}" ng-form="{{question.name}}">
+                <label ng-repeat="option in question.options">
+                    <input ng-model="data.puppyData[question.name]" type="radio" name="{{question.name}}" value="{{option.value}}" ng-required="true">
+                    <span>{{option.text}}</span>
+                    <br />
+                </label>
+            </fieldset>
+            {{$index}}
+            <button ng-if="$index!==(questions.length-1)" ng-disabled="!data.puppyData[question.name]" type="button" ng-click="scrollTo($index+1)">다음 질문</button>
+            <input type="submit" role="button" ng-if="$index===(questions.length-1)" value="나에게 맞는 반려견 보기" ng-disabled="survey.$invalid" />
+          </md-card>
+        </div>
+        <md-divider ng-if="$index!==(questions.length-1)"></md-divider>
+      </div>
+    </md-virtual-repeat-container>
+  </form>
+</md-content>
