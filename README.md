@@ -10,6 +10,8 @@ Puppy Matching Service for Newcomers
 
 처음 반려견을 입양하려는 사람들은 수없이 많은 견종 중에서 자신에게 적합한 종을 선택하기가 어렵습니다. Puppy Finder는 그러한 잘못된 선택으로 인한 유기견의 증가 등 사회적 문제를 경감하는데 도움이 될 수 있습니다. 저희는 처음 반려견을 입양할 때 간과하기 쉬운 평균적인 양육비용 등의 항목들에 대해 축적된 데이터베이스를 활용하여 최적의 제안을 하고자 합니다.
 
+People who try to adopt a puppy for the first time often find it difficult to choose the right one for them. This becomes a huge problem when a wrong decision leads to serious animal abuses. Puppy Finder suggests our users what breeds are the best fit. We consider users' living conditions and expectations including residence, expenditures and so on.
+
 ## Installation
 
 Make sure to 
@@ -41,7 +43,7 @@ TBD
 
 ## Contributors
 
-TBD
+Contributors may send PULL REQUESTS to this repo.
 
 ## License
 
