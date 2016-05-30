@@ -1,8 +1,10 @@
+# Puppy Finder
+
 ## Synopsis
 
-At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
 반려견을 처음으로 입양하려는 사람들을 위한 견종 추천 서비스
-Matching service for new-comers
+
+Puppy Match Making Service for Newcomers 
 
 ## Motivation
 
@@ -15,6 +17,7 @@ Make sure to
 bower install
 npm install
 ```
+at the ROOT directory
 
 ## Basic Structure
 
@@ -38,8 +41,8 @@ TBD
 
 ## Contributors
 
-Let people know how they can dive into the project, include important links to things like issue trackers, irc, twitter accounts if applicable.
+TBD
 
 ## License
 
-A short snippet describing the license (MIT, Apache, etc.)
+TBD
