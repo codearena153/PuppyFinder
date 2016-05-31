@@ -20,6 +20,7 @@ bower install
 npm install
 ```
 at the ROOT directory
+* When bower install, make sure to select 3) (the latest version)
 
 ## When Run
 ```
@@ -28,8 +29,6 @@ nodemon server/server.js
 ```
 104.236.82.140:8888 : Redirects to intro.html (via express static)
 104.236.82.140:8888/admin, update, upload, stat : Admin Page to manage internal DB
-
-* When bower install, make sure to select 3) (the latest version)
 
 ## Basic Structure
 
