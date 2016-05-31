@@ -20,6 +20,9 @@ bower install
 npm install
 ```
 at the ROOT directory
+
+* Bower deals with all installations related to Front-end
+* NPM manages Back-end installations
 * When bower install, make sure to select 3) (the latest version)
 
 ## How to Run
