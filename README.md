@@ -28,7 +28,8 @@ mongod
 nodemon server/server.js
 ```
 104.236.82.140:8888 : Redirects to intro.html (via express static)
-104.236.82.140:8888/admin, update, upload, stat : Admin Page to manage internal DB
+
+104.236.82.140:8888/admin, /update, /upload, /stat : Admin Page to manage internal DB
 
 ## Basic Structure
 
