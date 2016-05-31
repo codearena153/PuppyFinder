@@ -64,13 +64,23 @@ div.intro {
   z-index: 10;
   color: black;
 }
+div.question-wrapper {
+  background-color: #ABABAB;
+  background-size: cover;
+}
+
+div.in-card {
+  width: 640px;
+}
 
 md-card.question {
+  /*opacity: 0.8;*/
   width: 740px;
   height: 480px;
 }
 
 md-card.tabContent {
+  margin: 50px 0 0 0;
   width: 740px;
   padding: 50px;
 }
@@ -91,7 +101,8 @@ header {
 
 header a {
   font-size: 20px;
-  color: #E4FFB6;
+  font-weight: 700;
+  color: #E7E7E7;
 }
 
 .md-raised {
@@ -101,4 +112,35 @@ header a {
 .md-raised.intro {
   width: 270px;
   height: 46px;
+}
+
+.md-raised.question {
+  width: 640px;
+  height: 46px;
+  background-color: #009688;
+  color: white;
+}
+
+.question-header {
+  font-size: 12px;
+  padding: 0;
+  margin-bottom: 14px;
+}
+
+h1.question-h1 {
+  font-size: 36px;
+}
+
+fieldset {
+  margin:0 0 20px 0;
+  padding:0;
+  border-width: 0;
+}
+
+.result-wrapper {
+  background-color: #E0F2F1;
+}
+
+.result-wrapper h1 {
+  margin: 0 0 40px 0;
 }

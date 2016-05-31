@@ -5,23 +5,25 @@
     <md-virtual-repeat-container layout="column" ng-style="{'height': (height)+'px'}" md-top-index="topIndex">
       <!-- Angular-maretial repeat elements; md-item-size defines scroll height(position of topIndex) for one item -->
       <div md-virtual-repeat="question in questions" md-item-size="height">
-        <div layout="column" layout-align="center center" ng-style="{'height': (height)+'px'}">
-          <md-card class="question">
-            <md-card-header>{{question.subject}}</md-card-header>
-            <h1>{{question.title}}</h1>
-            <p>{{question.content}}</p>
-            <!-- Options in a question should be grouped in a fieldset for form validation -->
-            <fieldset id="{{question.name}}" ng-form="{{question.name}}">
-              <label ng-repeat="option in question.options">
-                <input ng-model="data.puppyData[question.name]" type="radio" name="{{question.name}}" value="{{option.value}}" ng-required="true">
-                <span>{{option.text}}</span>
-                <br />
-              </label>
-            </fieldset>
-            <!-- Button to scroll(move) to the next question; disabled if this question is not answered -->
-            <button ng-if="$index!==(questions.length-1)" ng-disabled="!data.puppyData[question.name]" type="button" ng-click="scrollTo($index+1)">다음 질문</button>
-            <!-- Submit button for the entire form; disabled if any question is not answered -->
-            <input type="submit" role="button" ng-if="$index===(questions.length-1)" value="나에게 맞는 반려견 보기" ng-disabled="survey.$invalid" />
+        <div class="question-wrapper" layout="column" layout-align="center center" ng-style="{'height': (height)+'px', 'background-image': 'url(/assets/dog'+$index+'.jpeg)'}">
+          <md-card class="question" layout="column" layout-align="center center">
+            <div class="in-card" layout="column" layout-align="center">
+              <md-card-header class="question-header">{{question.subject}}</md-card-header>
+              <h1 class="question-h1">{{question.title}}</h1>
+              <p>{{question.content}}</p>
+              <!-- Options in a question should be grouped in a fieldset for form validation -->
+              <fieldset id="{{question.name}}" ng-form="{{question.name}}">
+                <label ng-repeat="option in question.options">
+                  <input ng-model="data.puppyData[question.name]" type="radio" name="{{question.name}}" value="{{option.value}}" ng-required="true">
+                  <span>{{option.text}}</span>
+                  <br />
+                </label>
+              </fieldset>
+              <!-- Button to scroll(move) to the next question; disabled if this question is not answered -->
+              <md-button class="md-raised question" ng-if="$index!==(questions.length-1)" ng-disabled="!data.puppyData[question.name]" type="button" ng-click="scrollTo($index+1)">다음 질문</md-button>
+              <!-- Submit button for the entire form; disabled if any question is not answered -->
+              <input class="md-button md-raised question primary" type="submit" ng-if="$index===(questions.length-1)" value="나에게 맞는 반려견 보기" ng-disabled="survey.$invalid" />
+            </div>
           </md-card>
         </div>
         <!-- hr like line to divide questions -->
