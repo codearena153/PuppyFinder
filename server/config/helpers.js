@@ -152,6 +152,8 @@ exports.calculateTotalWeight = function(data) {
       total_weight += weightTbl.MAINTENANCE.MC_30;
       break;
   }
+
+  return total_weight;
 };
 
 /* Set weight for individual fields and return total weight */
