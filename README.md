@@ -22,7 +22,7 @@ npm install
 at the ROOT directory
 * When bower install, make sure to select 3) (the latest version)
 
-## When Run
+## How to Run
 ```
 mongod
 nodemon server/server.js
