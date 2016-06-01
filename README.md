@@ -62,6 +62,8 @@ nodemon server/server.js
 3. 사용자가 입력한 답들을 JSON으로 서버에 전송하면, 각 답에 따른 점수(weight)를 모두 합산하여 totalWeight을 낸 후, DB의 각 견종(breed)가 가지고 있는 자체 weight와 비교하여 가장 가까운 3 종을 response로 보내준다. 
 4. 이 방식은 기본적으로 비용관련 질문에 대한 답에 따라 추천 견종이 결정되게 된다. 
 
+----------------------
+
 1. Each survey question has accompanying options (2 to 5). Each option has pre-defined weight (works similiar to matching score)
 2. Most of options are assigned weight as 0 or 1 whereas surveys that ask about initialCost and maintenance ($ related) are assigned as 10.
 	- As default, we assumed cost issue is the most important for most newcomers
