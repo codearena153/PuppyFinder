@@ -55,8 +55,10 @@ nodemon server/server.js
 
 ## Backend
 
-### 현재 추천 알고리즘
+### 현재 추천 알고리즘 (Recommendation Algorithm) 
 1. 각 질문의 옵션별 weight(일종의 점수)가 정해져 있다. 
+* Each survey question has accompanying options (2 to 5). Each option has pre-defined weight (works similiar to matching score)
+
 2. 대부분의 질문은 0, 1점이고 비용 관련 질문만 점수가 10점대로 할당되어 있다.
 	- 비용관련이 가장 비중이 높다고 생각했기 때문 
 3. 사용자가 입력한 답들을 JSON으로 서버에 전송하면, 각 답에 따른 점수(weight)를 모두 합산하여 totalWeight을 낸 후, DB의 각 견종(breed)가 가지고 있는 자체 weight와 비교하여 가장 가까운 3 종을 response로 보내준다. 
