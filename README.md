@@ -56,19 +56,26 @@ nodemon server/server.js
 ## Backend
 
 ### 현재 추천 알고리즘 (Recommendation Algorithm) 
-1. 각 질문의 옵션별 weight(일종의 점수)가 정해져 있다. 
-* Each survey question has accompanying options (2 to 5). Each option has pre-defined weight (works similiar to matching score)
-
+1. 각 질문의 옵션별 weight(일종의 점수)가 정해져 있다 
 2. 대부분의 질문은 0, 1점이고 비용 관련 질문만 점수가 10점대로 할당되어 있다.
 	- 비용관련이 가장 비중이 높다고 생각했기 때문 
 3. 사용자가 입력한 답들을 JSON으로 서버에 전송하면, 각 답에 따른 점수(weight)를 모두 합산하여 totalWeight을 낸 후, DB의 각 견종(breed)가 가지고 있는 자체 weight와 비교하여 가장 가까운 3 종을 response로 보내준다. 
 4. 이 방식은 기본적으로 비용관련 질문에 대한 답에 따라 추천 견종이 결정되게 된다. 
 
-### 개선점
+1. Each survey question has accompanying options (2 to 5). Each option has pre-defined weight (works similiar to matching score)
+2. Most of options are assigned weight as 0 or 1 whereas surveys that ask about initialCost and maintenance ($ related) are assigned as 10.
+	- As default, we assumed cost issue is the most important for most newcomers
+3. User input data will be sent to server as JSON. Then each survey options selected will be added to yield totalWeight. This will be compared to each pre-saved puppies' totalWeight and finally send three matching puppies (with closest totalWeight) as response.
+4. To sum up, the biggest factor in matching is how much new comers are willing to pay for puppies.
+
+
+### 개선점 (To-Do List)
 1. 사용자가 입력한 답과 DB의 각 견종이 가진 답을 비교하여 둘이 일치할 때 점수(weight)를 주고, 이 점수를 합산하는 방식으로 변경하여 더 정확히 추천한다.
 2. 사용자 질문 submit 후 서버에서 응답하는 데 걸리는 시간이 늘어날 걸로 보이므로 survey와 result 사이에 로딩화면이 필요할 것으로 보인다(별도의 html일 필요는 없음, survey 페이지에서 서브밋 버튼 누르면 ng-show로 로딩 애니메이션이 보이게 처리하면 될 듯).
 3. 실수로 같은 breed data를 입력해도 중복처리가 안되어 있다.
 4. Intro Background Video 가 Static File 로 처리됨 (10메가)
+
+
 
 ### Advanced
 1. [다음 백과사전], 네이버 백과사전 등을 참고해 Result 페이지에서 더 많은 정보를 보여줄 수 있도록 DB의 견종별 정보를 더 세분화하여 입력한다. 특히 견종의 영문명을 추가하면 이미지 검색 API, Youtube API 등에 요청할 때 영문으로 해서 더 풍부한 검색 결과를 받아올 수 있을 것이다.
